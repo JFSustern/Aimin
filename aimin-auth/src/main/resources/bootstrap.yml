@@ -1,0 +1,18 @@
+server:
+  port: 9001
+  servlet:
+    context-path: /aimin-auth
+
+spring:
+  application:
+    name: aimin-auth
+
+  cloud:
+    nacos:
+      server-addr: 8.141.30.139:8848
+      discovery:
+        namespace: 449909fc-d990-4165-a6f7-ae2227b218c4
+        group: DEFAULT_GROUP
+      config:
+        namespace: 449909fc-d990-4165-a6f7-ae2227b218c4
+        group: DEFAULT_GROUP
