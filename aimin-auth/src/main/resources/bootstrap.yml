@@ -6,6 +6,8 @@ server:
 spring:
   application:
     name: aimin-auth
+  profiles:
+    active: dev
 
   cloud:
     nacos:
@@ -16,3 +18,8 @@ spring:
       config:
         namespace: 449909fc-d990-4165-a6f7-ae2227b218c4
         group: DEFAULT_GROUP
+  config:
+    import:
+      - nacos:${spring.application.name}-${spring.profiles.active}.yml
+
+

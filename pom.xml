@@ -24,6 +24,9 @@
         <spring-cloud-alibaba.version>2023.0.3.2</spring-cloud-alibaba.version>
         <spring-boot.version>3.4.0</spring-boot.version>
         <lombok.version>1.18.36</lombok.version>
+        <fastjson2.version>2.0.53</fastjson2.version>
+        <weixin-java-miniapp.version>4.6.0</weixin-java-miniapp.version>
+        <guava.version>33.4.0-jre</guava.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -54,6 +57,26 @@
                 <artifactId>aimin-common-core</artifactId>
                 <version>${aimin.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/com.alibaba.fastjson2/fastjson2 -->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>wx-java-miniapp-spring-boot-starter</artifactId>
+                <version>${weixin-java-miniapp.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>
