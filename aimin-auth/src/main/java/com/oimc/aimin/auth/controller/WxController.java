@@ -15,11 +15,12 @@ public class WxController {
 
     private final WxService wxService;
 
-    @GetMapping("/login")
-    public Result<?> login(String code) {
+    @GetMapping("/token")
+    public Result<?> token(String code) {
         Jscode2sessionResult result = wxService.Code2Session(code);
-        System.out.println(result);
+
         return Result.success("");
     }
+
 
 }

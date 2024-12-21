@@ -24,6 +24,13 @@ public class WxService {
     public static final String CHECK_SESSION_URL = "https://api.weixin.qq.com/sns/jscode2session";
     public static final String GET_ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token";
 
+
+    public String wxLogin(String code){
+        Jscode2sessionResult result = Code2Session(code);
+        result.getOpenid();
+        return null;
+    }
+
     /**
      * https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/user-login/code2Session.html
      * @param jsCode
