@@ -1,0 +1,16 @@
+package com.oimc.aimin.auth.service;
+
+import com.oimc.aimin.auth.entity.UserAccount;
+import com.baomidou.mybatisplus.extension.service.IService;
+
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author root
+ * @since 2024/12/23
+ */
+public interface UserAccountService extends IService<UserAccount> {
+
+}
