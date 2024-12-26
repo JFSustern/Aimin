@@ -31,18 +31,15 @@ spring:
       username: root
       password: kingks()16
       driver-class-name: com.mysql.cj.jdbc.Driver
-
   data:
-  # redis配置
+    # redis配置
     redis:
       # Redis数据库索引（默认为0）
       database: 1
       # Redis服务器地址
-      host: 8.141.30.139
+      host: 127.0.0.1
       # Redis服务器连接端口
       port: 6379
-      # Redis服务器连接密码（默认为空）
-      password: 123456
       # 连接超时时间
       timeout: 10s
       lettuce:

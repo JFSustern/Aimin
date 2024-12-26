@@ -1,6 +1,7 @@
 package com.oimc.aimin.auth.service.impl;
 
 
+import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
@@ -28,23 +29,47 @@ public class WxServiceImpl implements WxService {
     private final WxMiniprogramService wxMiniprogramService;
     private final UserAccountService userAccountService;
 
-    @Override
+    private final static String DEVICE_MINIPROGRAM = "miniprogram";
+    /**
+     * 微信小程序登录接口。
+     * 该方法实现通过微信小程序提供的 `code` 参数完成用户登录操作，具体流程如下：
+     * 1. 调用 `wxMiniprogramService.Code2Session(code)` 方法，通过微信小程序提供的 `code` 换取用户的 `openid`。
+     * 2. 使用用户的 `openid` 查询用户账户信息，判断当前用户是否已经存在于系统中：
+     *    - 如果用户不存在（查询结果为 `null`），则创建一个新的用户账户，并保存到数据库中。
+     * 3. 判断当前用户是否已登录：
+     *    - 如果用户未登录（`StpUtil.isLogin()` 返回 `false`），则使用 `openid` 调用 `StpUtil.login(openid)` 方法进行登录。
+     * 4. 最后，返回用户的登录 Token 信息，通过 `StpUtil.getTokenInfo()` 获取。
+     *
+     * @param code 微信小程序端传入的登录凭证 `code`，用于获取用户的会话信息。
+     * @return 用户的登录 Token 信息，包含登录状态、Token 值、有效期等。
+     */
     public SaTokenInfo wxLogin(String code) {
+        // 使用 code 换取微信用户的 openid
         Jscode2sessionResult jscode2sessionResult = wxMiniprogramService.Code2Session(code);
         String openid = jscode2sessionResult.getOpenid();
+
+        // 根据 openid 查询用户账户是否存在
         UserAccount one = userAccountService.getOne(new LambdaQueryWrapper<UserAccount>().eq(UserAccount::getOpenid, openid));
+
+        // 如果用户账户不存在，则创建新账户并保存到数据库
         if(one == null){
-            UserAccount userAccount = UserAccount.builder()
-                    .openid(openid)
-                    .build();
+            UserAccount userAccount = new UserAccount();
+            userAccount.setOpenid(openid);
             userAccountService.save(userAccount);
         }
-        boolean login = StpUtil.isLogin();
-        System.out.println("tokenValue:" + login);
-        StpUtil.login(openid);
-        return StpUtil.getTokenInfo();
 
+        // 如果用户未登录，则使用 openid 进行登录
+        if(!StpUtil.isLogin()){
+            SaLoginModel saLoginModel = new SaLoginModel();
+            saLoginModel.setDevice(DEVICE_MINIPROGRAM);
+            saLoginModel.setIsWriteHeader(false);
+            StpUtil.login(openid,saLoginModel);
+        }
+
+        // 返回当前用户的 Token 信息
+        return StpUtil.getTokenInfo();
     }
+
 
     @Override
     public Jscode2sessionResult Code2Session(String jsCode) {

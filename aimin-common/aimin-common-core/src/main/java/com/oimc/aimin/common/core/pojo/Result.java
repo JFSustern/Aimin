@@ -1,7 +1,10 @@
 package com.oimc.aimin.common.core.pojo;
 
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 @Data
@@ -26,6 +29,12 @@ public class Result<T> implements Serializable {
         Result<T> result = new Result<>();
         result.code = SUCCESS_CODE;
         result.data = data;
+        result.msg = SUCCESS_MSG;
+        return result;
+    }
+    public static <T> Result<T> success() {
+        Result<T> result = new Result<>();
+        result.code = SUCCESS_CODE;
         result.msg = SUCCESS_MSG;
         return result;
     }

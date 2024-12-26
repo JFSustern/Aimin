@@ -13,4 +13,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserAccountService extends IService<UserAccount> {
 
+    boolean updateByOpenId(UserAccount userAccount);
+
+    boolean updateAvatar(String avatarUrl);
+
+    boolean updateNick(String nickName);
 }

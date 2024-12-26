@@ -20,7 +20,6 @@ import lombok.Data;
  */
 @Data
 @TableName("t_user_account")
-@Builder
 public class UserAccount implements Serializable {
 
     private static final long serialVersionUID = 1L;
