@@ -1,4 +1,4 @@
-package com.oimc.aimin.config.redis;
+package com.oimc.aimin.redis.config;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;

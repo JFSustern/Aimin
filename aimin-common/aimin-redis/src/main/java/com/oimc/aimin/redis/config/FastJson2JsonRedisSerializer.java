@@ -1,4 +1,4 @@
-package com.oimc.aimin.config.redis;
+package com.oimc.aimin.redis.config;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONWriter;

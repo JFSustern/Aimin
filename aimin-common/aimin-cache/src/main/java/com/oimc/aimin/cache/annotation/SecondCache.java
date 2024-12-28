@@ -2,7 +2,6 @@ package com.oimc.aimin.cache.annotation;
 
 
 import com.oimc.aimin.cache.config.CacheType;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import java.lang.annotation.*;
