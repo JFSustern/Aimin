@@ -33,7 +33,7 @@ public class Generate {
                             .entity("entity")
                             .mapper("mapper")
                             .service("service")
-                            .serviceImpl("serviceImpl")
+                            .serviceImpl("service")
                             .xml("xml");
                 })
                 // 策略配置

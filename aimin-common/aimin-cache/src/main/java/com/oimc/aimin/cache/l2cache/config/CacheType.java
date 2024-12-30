@@ -1,4 +1,4 @@
-package com.oimc.aimin.cache.config;
+package com.oimc.aimin.cache.l2cache.config;
 
 public enum CacheType {
 

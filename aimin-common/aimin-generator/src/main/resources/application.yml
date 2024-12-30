@@ -3,4 +3,4 @@ mysql:
   username: root
   password: kingks()16
   author: zhage
-  packageParent: com.oimc.aimin.auth
+  packageParent: com.oimc.aimin.drug

@@ -18,7 +18,7 @@
         <module>aimin-generator</module>
         <module>aimin-redis</module>
         <module>aimin-cache</module>
-
+        <module>aimin-mp</module>
     </modules>
 
     <dependencies>

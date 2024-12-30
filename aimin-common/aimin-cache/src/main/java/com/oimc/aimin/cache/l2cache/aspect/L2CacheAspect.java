@@ -1,10 +1,10 @@
-package com.oimc.aimin.cache.aspect;
+package com.oimc.aimin.cache.l2cache.aspect;
 
 
 import com.github.benmanes.caffeine.cache.Cache;
-import com.oimc.aimin.cache.annotation.SecondCache;
-import com.oimc.aimin.cache.config.CacheType;
-import com.oimc.aimin.cache.utils.ElParser;
+import com.oimc.aimin.cache.l2cache.annotation.L2Cache;
+import com.oimc.aimin.cache.l2cache.config.CacheType;
+import com.oimc.aimin.cache.l2cache.utils.ElParser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -24,14 +24,14 @@ import java.util.concurrent.TimeUnit;
 @Component
 @Aspect
 @RequiredArgsConstructor
-public class SecondAspect {
+public class L2CacheAspect {
 
     public static final String COLON = "::";
 
     private final Cache<String, Object> cache;
     private final RedisTemplate<Object,Object> redisTemplate;
 
-    @Pointcut("@annotation(com.oimc.aimin.cache.annotation.SecondCache)")
+    @Pointcut("@annotation(com.oimc.aimin.cache.l2cache.annotation.L2Cache)")
     public void cacheAspect() {
     }
 
@@ -48,7 +48,7 @@ public class SecondAspect {
             treeMap.put(paramNames[i],args[i]);
         }
 
-        SecondCache annotation = method.getAnnotation(SecondCache.class);
+        L2Cache annotation = method.getAnnotation(L2Cache.class);
         String elResult = ElParser.parse(annotation.key(), treeMap);
         String realKey = annotation.cacheName() + COLON + elResult;
 

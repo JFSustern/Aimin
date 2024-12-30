@@ -12,7 +12,7 @@ import com.oimc.aimin.drug.entity.DrugCategories;
  * @author root
  * @since 2024/12/28
  */
-public interface DrugCategoriesMapper extends BaseMapper<DrugCategories> {
 
+public interface DrugCategoriesMapper extends BaseMapper<DrugCategories> {
 
 }

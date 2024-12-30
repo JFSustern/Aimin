@@ -1,2 +1,5 @@
-com.oimc.aimin.cache.config.CacheConfig
-com.oimc.aimin.cache.aspect.SecondAspect
+com.oimc.aimin.cache.l2cache.config.L2CacheConfig
+com.oimc.aimin.cache.l2cache.aspect.L2CacheAspect
+com.oimc.aimin.cache.l2cache.config.L2CacheProperties
+
+

@@ -25,6 +25,10 @@ spring:
           uri: lb://aimin-auth
           predicates:
             - Path=/aimin-auth/**
+        - id: aimin-drug-server
+          uri: lb://aimin-drug
+          predicates:
+            - Path=/aimin-drug/**
   data:
     # redis配置
     redis:

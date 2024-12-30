@@ -1,7 +1,7 @@
 package com.oimc.aimin.auth.service.impl;
 
-import com.oimc.aimin.cache.annotation.SecondCache;
-import com.oimc.aimin.cache.config.CacheType;
+import com.oimc.aimin.cache.l2cache.annotation.L2Cache;
+import com.oimc.aimin.cache.l2cache.config.CacheType;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -10,7 +10,7 @@ import java.util.Map;
 @Service
 public class TestService {
 
-    @SecondCache( cacheName = "caffeineCache", key = "#id", type = CacheType.FULL)
+    @L2Cache( cacheName = "caffeineCache", key = "#id", type = CacheType.FULL)
     public Map<String,String> getUserById(Long id) {
         System.out.println("Fetching user from database for ID: " + id);
         return buildUser(String.valueOf(id));

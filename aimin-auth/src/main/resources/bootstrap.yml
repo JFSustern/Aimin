@@ -67,3 +67,9 @@ sa-token:
   token-style: random-64
   # 是否输出操作日志
   is-log: true
+
+l2cache:
+  initial-capacity: 1000
+  maximum-size: 10000
+  expire-after-write: 60
+  time-unit: SECONDS
