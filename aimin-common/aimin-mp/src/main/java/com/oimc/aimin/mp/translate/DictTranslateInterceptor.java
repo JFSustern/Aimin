@@ -9,9 +9,7 @@ import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Signature;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.sql.Statement;
@@ -20,11 +18,10 @@ import java.util.Properties;
 
 
 @Intercepts({@Signature(type = ResultSetHandler.class, method = "handleResultSets", args = {Statement.class})})
+@RequiredArgsConstructor(onConstructor = @__(@Lazy))
 public class DictTranslateInterceptor implements Interceptor {
 
-    @Autowired
-    @Lazy
-    DictService dictService;
+    private final DictService dictService;
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
@@ -39,7 +36,6 @@ public class DictTranslateInterceptor implements Interceptor {
         } else {
             translateEntity(result); // 处理单个对象
         }
-
         return result;
     }
 
@@ -56,12 +52,10 @@ public class DictTranslateInterceptor implements Interceptor {
                 String dictType = annotation.dictType();
                 String valueTo = annotation.valueTo();
 
-
                 // 获取字段值（关联 ID）
                 field.setAccessible(true);
-
                 // 查询字典表中的名称
-                String name = field.getName();
+                String name;
                 Object o = field.get(entity);
                 if(o != null){
                     if("NONE".equals(dictType)){

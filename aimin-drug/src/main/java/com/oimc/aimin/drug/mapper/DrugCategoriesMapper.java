@@ -2,6 +2,7 @@ package com.oimc.aimin.drug.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.oimc.aimin.drug.entity.DrugCategories;
+import org.apache.ibatis.annotations.Select;
 
 
 /**
@@ -15,4 +16,6 @@ import com.oimc.aimin.drug.entity.DrugCategories;
 
 public interface DrugCategoriesMapper extends BaseMapper<DrugCategories> {
 
+    @Select("SELECT * FROM t_drug_categories WHERE category_id = #{categoryId}")
+    DrugCategories selectById(Integer categoryId);
 }

@@ -16,4 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class DrugCategoriesServiceImpl extends ServiceImpl<DrugCategoriesMapper, DrugCategories> implements DrugCategoriesService {
 
+    DrugCategories selectById(String id) {
+        return baseMapper.selectById(id);
+    }
 }
