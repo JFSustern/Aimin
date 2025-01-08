@@ -1,18 +1,17 @@
 package com.oimc.aimin.drug.controller.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.oimc.aimin.drug.Enums.DrugStatus;
 import com.oimc.aimin.mp.annotation.DictTranslate;
 import lombok.Data;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Data
-public class DrugsVO {
+public class DrugVO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -87,17 +86,6 @@ public class DrugsVO {
     
     private Integer stockQuantity;
 
-    /**
-     * 库存单位编号（SKU），唯一
-     */
-    
-    private String sku;
-
-    /**
-     * 条形码，唯一
-     */
-    
-    private String barCode;
 
     /**
      * 是否需要处方，TRUE 表示需要，FALSE 表示不需要
@@ -126,29 +114,5 @@ public class DrugsVO {
      */
     
     private String storageInstructions;
-
-    /**
-     * 药品创建时间，默认当前时间
-     */
-    
-    private LocalDateTime createdAt;
-
-    /**
-     * 药品更新时间，自动更新为当前时间
-     */
-    
-    private LocalDateTime updatedAt;
-
-    /**
-     * 药品状态，“Available”表示上架，“Unavailable”表示下架
-     */
-    
-    private DrugStatus status;
-
-    /**
-     * 是否逻辑删除，TRUE 表示已删除，FALSE 表示未删除
-     */
-    
-    private Boolean isDeleted;
 
 }

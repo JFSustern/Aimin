@@ -61,6 +61,6 @@ public class DrugCategories implements Serializable {
     private LocalDateTime updatedAt;
 
     @TableField(exist = false)
-    private List<Drugs> drugsList;
+    private List<Drug> drugsList;
 
 }

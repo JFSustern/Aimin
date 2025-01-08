@@ -8,39 +8,23 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>aimin-common-core</artifactId>
+    <artifactId>aimin-es</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>aimin-common-core</name>
-    <description>aimin-common-core</description>
+    <name>aimin-es</name>
+    <description>aimin-es</description>
 
     <properties>
         <java.version>21</java.version>
-        <spring.boot.version>3.4.0</spring.boot.version>
     </properties>
-
     <dependencies>
-
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct-processor</artifactId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
     </dependencies>
 
-
+    <build>
+        <finalName>aimin-es</finalName>
+    </build>
 
 </project>

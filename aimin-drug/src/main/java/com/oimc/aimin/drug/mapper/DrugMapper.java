@@ -2,8 +2,7 @@ package com.oimc.aimin.drug.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.oimc.aimin.drug.entity.DrugCategories;
-import com.oimc.aimin.drug.entity.Drugs;
+import com.oimc.aimin.drug.entity.Drug;
 import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -19,7 +18,7 @@ import org.apache.ibatis.annotations.Select;
  * @since 2024/12/28
  */
 
-public interface DrugsMapper extends BaseMapper<Drugs> {
+public interface DrugMapper extends BaseMapper<Drug> {
 
     @Select("SELECT " +
             "d.drug_id, \n" +
@@ -57,5 +56,5 @@ public interface DrugsMapper extends BaseMapper<Drugs> {
             @Result(property = "categories", column = "category_id",
                     one = @One(select = "com.oimc.aimin.drug.mapper.DrugCategoriesMapper.selectById")),
     })
-    Page<Drugs> selectDrugKindsPage(Page<Drugs> drugsPage);
+    Page<Drug> selectDrugKindsPage(Page<Drug> drugsPage);
 }

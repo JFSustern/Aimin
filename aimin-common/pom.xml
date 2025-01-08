@@ -19,13 +19,7 @@
         <module>aimin-redis</module>
         <module>aimin-cache</module>
         <module>aimin-mp</module>
+        <module>aimin-es</module>
+
     </modules>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-    </dependencies>
-
 </project>

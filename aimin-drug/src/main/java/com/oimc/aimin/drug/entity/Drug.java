@@ -21,8 +21,8 @@ import lombok.Data;
  * @since 2024/12/30
  */
 @Data
-@TableName("t_drugs")
-public class Drugs implements Serializable {
+@TableName("t_drug")
+public class Drug implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -48,7 +48,7 @@ public class Drugs implements Serializable {
      * 分类ID，与 t_drug_categories 表关联
      */
     @TableField("category_id")
-    private Long categoryId;
+    private Integer categoryId;
 
     /**
      * 品牌名称，例如“辉瑞”

@@ -52,9 +52,18 @@ spring:
           max-idle: 10
           # 连接池中的最小空闲连接
           min-idle: 0
+  elasticsearch:
+    uris: http://8.141.30.139:9200  # Elasticsearch 地址
 
-
-
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          elasticsearch: DEBUG
+      elasticsearch:
+        client:
+          RestClient: DEBUG
 #mybatis-plus:
 #  mapper-locations: classpath*:mapper/**/*.xml
 #  configuration:
