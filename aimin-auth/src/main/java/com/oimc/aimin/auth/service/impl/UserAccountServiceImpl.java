@@ -3,7 +3,6 @@ package com.oimc.aimin.auth.service.impl;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.oimc.aimin.auth.entity.UserAccount;
 import com.oimc.aimin.auth.mapper.UserAccountMapper;
 import com.oimc.aimin.auth.service.UserAccountService;

@@ -26,6 +26,7 @@ public class DrugVO implements Serializable {
     
     private String name;
 
+
     /**
      * 药品通用名，药品的标准学名
      */

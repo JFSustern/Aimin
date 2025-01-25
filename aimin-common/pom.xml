@@ -20,6 +20,8 @@
         <module>aimin-cache</module>
         <module>aimin-mp</module>
         <module>aimin-es</module>
+        <module>aimin-mq</module>
+
 
     </modules>
 </project>

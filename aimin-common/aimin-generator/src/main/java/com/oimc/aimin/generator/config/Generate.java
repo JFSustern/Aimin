@@ -6,6 +6,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,12 +25,12 @@ public class Generate {
                 // 全局配置
                 .globalConfig(builder -> {
                     builder.author(properties.getUsername())
-                            .outputDir(Paths.get(System.getProperty("user.dir")) + "/generate_output")
+                            .outputDir(Paths.get(System.getProperty("user.dir")) + File.separator +"generate_output")
                             .commentDate("yyyy/MM/dd");
                 })
                 // 包配置
-                .packageConfig(builder -> {
-                    builder.parent(properties.getPackageParent())
+                .packageConfig( (scanner, builder) -> {
+                    builder.parent(scanner.apply("输入包名"))
                             .entity("entity")
                             .mapper("mapper")
                             .service("service")

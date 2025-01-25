@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class DrugQueryDTO extends Page<Drug> {
+public class DrugSearchDto extends Page<Drug> {
 
     private String keyword;
 

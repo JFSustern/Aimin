@@ -14,10 +14,10 @@ spring:
     nacos:
       server-addr: 8.141.30.139:8848
       discovery:
-        namespace: 449909fc-d990-4165-a6f7-ae2227b218c4
+        namespace: c2b3b47a-098e-4609-91a8-3e97b59405cf
         group: DEFAULT_GROUP
       config:
-        namespace: 449909fc-d990-4165-a6f7-ae2227b218c4
+        namespace: c2b3b47a-098e-4609-91a8-3e97b59405cf
         group: DEFAULT_GROUP
 
   config:
@@ -27,9 +27,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      url: jdbc:mysql://rm-2zeu4x1450e1g7xl75o.mysql.rds.aliyuncs.com:3306/aimin?characterEncoding=utf8&serverTimezone=Asia/Shanghai
+      url: jdbc:mysql://8.141.30.139:13306/aimin?characterEncoding=utf8&serverTimezone=Asia/Shanghai
       username: root
-      password: kingks()16
+      password: 123456
       driver-class-name: com.mysql.cj.jdbc.Driver
   data:
     # redis配置
@@ -73,3 +73,10 @@ l2cache:
   maximum-size: 10000
   expire-after-write: 60
   time-unit: SECONDS
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+
+wx:
+  appid: wx9568bdfc5d43d6ed
+  secret: 1d623de8e508759374afe10b888fb122

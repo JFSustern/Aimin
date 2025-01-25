@@ -26,7 +26,6 @@ public class WxMiniprogramService {
 
     private final RestTemplate restTemplate;
     private final WXProperties wxProperties;
-    private final RedisTemplate redisTemplate;
 
 
     public Jscode2sessionResult Code2Session(String jsCode) {
