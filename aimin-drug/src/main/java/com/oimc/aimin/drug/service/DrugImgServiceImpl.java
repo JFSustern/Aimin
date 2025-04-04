@@ -1,8 +1,7 @@
 package com.oimc.aimin.drug.service;
 
-import com.oimc.aimin.drug.entity.DrugImg;
+import com.oimc.aimin.drug.model.entity.DrugImg;
 import com.oimc.aimin.drug.mapper.DrugImgMapper;
-import com.oimc.aimin.drug.service.DrugImgService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

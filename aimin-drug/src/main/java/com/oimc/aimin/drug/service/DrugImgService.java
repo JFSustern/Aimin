@@ -1,8 +1,7 @@
 package com.oimc.aimin.drug.service;
 
 import com.github.yulichang.extension.mapping.base.MPJDeepService;
-import com.oimc.aimin.drug.entity.DrugImg;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.oimc.aimin.drug.model.entity.DrugImg;
 
 /**
  * <p>

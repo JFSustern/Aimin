@@ -1,16 +1,11 @@
 package com.oimc.aimin.es.config;
 
-import com.oimc.aimin.es.init.StartupEventListener;
-import com.oimc.aimin.es.service.DrugEsOperationImpl;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
-@Import({
-        StartupEventListener.class,
-        DrugEsOperationImpl.class
-})
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "com.oimc.aimin.es.repository")
+/*@EsMapperScan("com.oimc.aimin.*.es.*.mapper")
+@ConditionalOnProperty(value = "easy-es.enable")*/
 public class EsAutoConfiguration {
+
 }

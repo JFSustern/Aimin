@@ -1,13 +1,7 @@
 package com.oimc.aimin.drug.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.yulichang.extension.mapping.base.MPJDeepService;
-import com.oimc.aimin.drug.controller.vo.DrugVO;
-import com.oimc.aimin.drug.dto.DrugSearchDto;
-import com.oimc.aimin.drug.entity.Drug;
-import com.oimc.aimin.es.dto.DrugSearchRequest;
-
+import com.oimc.aimin.drug.model.entity.Drug;
 import java.util.List;
 
 /**
@@ -20,13 +14,9 @@ import java.util.List;
  */
 public interface DrugService extends MPJDeepService<Drug> {
 
-    List<DrugVO> pageList(DrugSearchRequest request);
+    List<Drug> findDrugsJoinCategories();
 
-    void saveAndSyncToES(Drug drug);
+    void insert(Drug entity);
 
-    List<DrugVO> searchWithHighlight(DrugSearchRequest request);
-
-    List<Drug> selectAll();
-
-    void syncAllData2Es();
+    void updateByPrimaryKey(Drug entity);
 }

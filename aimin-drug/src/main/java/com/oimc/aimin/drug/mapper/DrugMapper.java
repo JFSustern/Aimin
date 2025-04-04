@@ -1,9 +1,8 @@
 package com.oimc.aimin.drug.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.yulichang.base.MPJBaseMapper;
-import com.oimc.aimin.drug.entity.Drug;
+import com.oimc.aimin.drug.model.entity.Drug;
 import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;

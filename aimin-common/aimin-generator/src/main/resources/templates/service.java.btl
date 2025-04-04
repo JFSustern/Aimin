@@ -1,7 +1,7 @@
 package ${package.Service};
 
 import ${package.Entity}.${entity};
-import ${superServiceClassPackage};
+import com.github.yulichang.extension.mapping.base.MPJDeepService;
 
 /**
  * <p>
@@ -12,9 +12,9 @@ import ${superServiceClassPackage};
  * @since ${date}
  */
 <% if(kotlin){ %>
-interface ${table.serviceName} : ${superServiceClass}<${entity}>
+interface ${table.serviceName} : MPJDeepService<${entity}>
 <% }else{ %>
-public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
+public interface ${table.serviceName} extends MPJDeepService<${entity}> {
 
 }
 <% } %>

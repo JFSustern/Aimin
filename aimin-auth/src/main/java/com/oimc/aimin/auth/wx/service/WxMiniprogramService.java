@@ -8,15 +8,12 @@ import com.oimc.aimin.auth.wx.pojo.AccessTokenResult;
 import com.oimc.aimin.auth.wx.pojo.Jscode2sessionResult;
 import com.oimc.aimin.auth.wx.properties.WXProperties;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +32,7 @@ public class WxMiniprogramService {
         params.put("js_code", jsCode);
         params.put("grant_type", "authorization_code");
         String paramsStr = Joiner.on("&").withKeyValueSeparator("=").join(params);
-        String url = WxApiUrlConstants.Miniprogram.DO_LOGIN_URL + "?" + paramsStr;
+        String url = STR."\{WxApiUrlConstants.Miniprogram.DO_LOGIN_URL}?\{paramsStr}";
         String response = restTemplate.getForObject(url, String.class);
         return JSONObject.parseObject(response, Jscode2sessionResult.class);
     }

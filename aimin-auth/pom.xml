@@ -29,29 +29,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-log4j2</artifactId>
-        </dependency>
-
-        <!-- Config 配置中心相关 -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bootstrap</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.oimc</groupId>
-            <artifactId>aimin-common-core</artifactId>
+            <artifactId>aimin-base</artifactId>
         </dependency>
 
         <dependency>
@@ -65,18 +44,28 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-spring-boot3-starter</artifactId>
+            <groupId>com.oimc</groupId>
+            <artifactId>aimin-ds</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.oimc</groupId>
+            <artifactId>aimin-satoken</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>cn.dev33</groupId>
+                    <artifactId>sa-token-reactor-spring-boot3-starter</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.oimc</groupId>
             <artifactId>aimin-cache</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.oimc</groupId>
-            <artifactId>aimin-mp</artifactId>
         </dependency>
 
     </dependencies>

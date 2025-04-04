@@ -1,7 +1,7 @@
 package ${package.Mapper};
 
 import ${package.Entity}.${entity};
-import ${superMapperClassPackage};
+import com.github.yulichang.base.MPJBaseMapper;
 <% if(mapperAnnotationClass!=null){ %>
 import ${mapperAnnotationClass.name};
 <% } %>
@@ -18,9 +18,9 @@ import ${mapperAnnotationClass.name};
 @${mapperAnnotationClass.simpleName}
 <% } %>
 <% if(kotlin){ %>
-interface ${table.mapperName} : ${superMapperClass}<${entity}>
+interface ${table.mapperName} : MPJBaseMapper<${entity}>
 <% }else{ %>
-public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
+public interface ${table.mapperName} extends MPJBaseMapper<${entity}> {
 
 }
 <% } %>

@@ -1,61 +1,77 @@
 package com.oimc.aimin.drug.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.oimc.aimin.common.core.pojo.Result;
-import com.oimc.aimin.drug.controller.vo.DrugVO;
-import com.oimc.aimin.drug.dto.DrugDto;
-import com.oimc.aimin.drug.dto.DrugSearchDto;
-import com.oimc.aimin.drug.entity.Drug;
+import com.oimc.aimin.base.resp.Result;
+import com.oimc.aimin.drug.model.entity.Drug;
+import com.oimc.aimin.drug.model.req.DrugReq;
 import com.oimc.aimin.drug.service.DrugService;
 import com.oimc.aimin.drug.utils.ObjectConvertor;
-import com.oimc.aimin.es.dto.DrugSearchRequest;
-import com.oimc.aimin.es.index.DrugIndex;
-import com.oimc.aimin.es.service.DrugEsOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
+/**
+ * 药品管理控制器
+ * 提供药品的增删改查功能
+ */
 @RestController
-@RequestMapping("/drug")
+@RequestMapping("/api/drugs")
 @RequiredArgsConstructor
+@Tag(name = "药品管理", description = "药品的创建、查询、更新和删除")
 public class DrugController {
 
     private final DrugService drugService;
-    private final DrugEsOperation drugEsOperationService;
     private final ObjectConvertor objectConvertor;
 
-    @PostMapping("/search")
-    public Result<?> search(@RequestBody DrugSearchRequest request) {
-        List<DrugVO> drugVOList = drugService.searchWithHighlight(request);
-        return Result.success(drugVOList);
+
+
+    /**
+     * 创建药品
+     * 添加新的药品记录
+     *
+     * @param drug 药品信息请求对象
+     * @return 创建的药品ID
+     */
+    @Operation(summary = "新增药品", description = "添加新的药品记录")
+    @PostMapping
+    public Result<?> insert(@RequestBody @Valid DrugReq drug) {
+        Drug entity = objectConvertor.toDrug(drug);
+        drugService.insert(entity);
+        return Result.success(entity.getDrugId());
     }
 
-    @PostMapping("/pageList")
-    public Result<?> pageList(@RequestBody @Valid DrugSearchRequest request){
-        List<DrugVO> drugVOList = drugService.pageList(request);
-        return Result.success(drugVOList);
-    }
+    /**
+     * 更新药品信息
+     * 根据ID更新药品的信息
+     *
+     * @param drug 药品更新信息
+     * @return 操作结果
+     */
+    @Operation(summary = "更新药品", description = "更新指定ID的药品信息")
+    @PutMapping
+    public Result<?> update(@PathVariable( @RequestBody @Valid List<DrugReq> drug) {
+        objectConvertor.toDrugList(drug);
 
-    @PostMapping("/put")
-    public Result<?> put(@RequestBody @Valid DrugDto dto){
-        Drug drug = objectConvertor.drugDto2Drug(dto);
-        drugService.saveAndSyncToES(drug);
+        drugService.updateByPrimaryKey(entity);
         return Result.success();
     }
 
-
-    @PostMapping("/queryByKeyWord")
-    public Result<?> queryByKeyWord(DrugSearchDto dto){
-        DrugSearchRequest request = new DrugSearchRequest();
-        request.setKeyword(dto.getKeyword());
-        request.setPage(1);
-        request.setSize(10);
-        request.setDirection(Sort.Direction.ASC);
-        List<DrugIndex> drugIndices = drugEsOperationService.searchDrugsWithHighlight(request);
-        List<DrugVO> voList = objectConvertor.drugIndexList2DrugVoList(drugIndices);
-        return Result.success(voList);
+    /**
+     * 批量删除药品
+     * 根据ID集合批量删除药品记录
+     *
+     * @param ids 药品ID集合
+     * @return 操作结果
+     */
+    @Operation(summary = "批量删除药品", description = "根据ID集合批量删除药品记录")
+    @DeleteMapping
+    public Result<?> batchDelete(@RequestBody Set<Long> ids) {
+        drugService.removeByIds(ids);
+        return Result.success();
     }
+
 }

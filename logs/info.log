@@ -1,0 +1,54 @@
+[2025-03-06 03:58:34] INFO  org.springframework.cloud.bootstrap.config.PropertySourceBootstrapConfiguration 134 doInitialize - Located property source: [BootstrapPropertySource@925829785 {name='bootstrapProperties-aimin-drug-dev.properties,DEFAULT_GROUP', properties={}}, BootstrapPropertySource@358636931 {name='bootstrapProperties-aimin-drug.properties,DEFAULT_GROUP', properties={}}, BootstrapPropertySource@33238764 {name='bootstrapProperties-aimin-drug,DEFAULT_GROUP', properties={}}]
+[2025-03-06 03:58:34] INFO  org.springframework.boot.SpringApplication 658 logStartupProfileInfo - The following 1 profile is active: "dev"
+[2025-03-06 03:58:34] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate 143 registerRepositoriesIn - Bootstrapping Spring Data Elasticsearch repositories in DEFAULT mode.
+[2025-03-06 03:58:34] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate 211 registerRepositoriesIn - Finished Spring Data repository scanning in 19 ms. Found 1 Elasticsearch repository interface.
+[2025-03-06 03:58:34] INFO  org.springframework.cloud.context.scope.GenericScope 282 setSerializationId - BeanFactory id=17ea027b-cce4-357f-b351-f88539e443e4
+[2025-03-06 03:58:34] INFO  com.github.yulichang.autoconfigure.MybatisPlusJoinAutoConfiguration 141 info - MPJ SqlSessionFactory bean definition: sqlSessionFactory factoryBeanName: com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration factoryMethodName: sqlSessionFactory source: com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration.sqlSessionFactory(javax.sql.DataSource)
+[2025-03-06 03:58:34] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer 111 initialize - Tomcat initialized with port 9002 (http)
+[2025-03-06 03:58:34] INFO  org.apache.juli.logging.DirectJDKLog 173 log - Starting service [Tomcat]
+[2025-03-06 03:58:34] INFO  org.apache.juli.logging.DirectJDKLog 173 log - Starting Servlet engine: [Apache Tomcat/10.1.33]
+[2025-03-06 03:58:34] INFO  org.apache.juli.logging.DirectJDKLog 173 log - Initializing Spring embedded WebApplicationContext
+[2025-03-06 03:58:34] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext 296 prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 612 ms
+[2025-03-06 03:58:34] INFO  com.github.yulichang.autoconfigure.MybatisPlusJoinAutoConfiguration 141 info - mybatis plus join properties config complete
+[2025-03-06 03:58:34] INFO  com.alibaba.druid.spring.boot3.autoconfigure.DruidDataSourceAutoConfigure 68 dataSource - Init DruidDataSource
+[2025-03-06 03:58:34] INFO  com.alibaba.druid.pool.DruidDataSource 673 init - {dataSource-1} inited
+[2025-03-06 03:58:34] INFO  com.github.yulichang.autoconfigure.MybatisPlusJoinAutoConfiguration 141 info - mybatis plus join SqlInjector init
+[2025-03-06 03:58:37] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer 243 start - Tomcat started on port 9002 (http) with context path '/aimin-drug'
+[2025-03-06 03:58:37] INFO  com.alibaba.nacos.plugin.auth.spi.client.ClientAuthPluginManager 56 init - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+[2025-03-06 03:58:37] INFO  com.alibaba.nacos.plugin.auth.spi.client.ClientAuthPluginManager 56 init - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+[2025-03-06 03:58:38] INFO  com.alibaba.cloud.nacos.registry.NacosServiceRegistry 76 register - nacos registry, DEFAULT_GROUP aimin-drug 192.168.101.101:9002 register finished
+[2025-03-06 03:58:38] INFO  org.springframework.boot.StartupInfoLogger 59 logStarted - Started AiminDrugApplication in 8.15 seconds (process running for 8.883)
+[2025-03-06 03:58:38] INFO  com.alibaba.cloud.nacos.refresh.NacosContextRefresher 131 registerNacosListener - [Nacos Config] Listening config: dataId=aimin-drug.properties, group=DEFAULT_GROUP
+[2025-03-06 03:58:38] INFO  com.alibaba.cloud.nacos.refresh.NacosContextRefresher 131 registerNacosListener - [Nacos Config] Listening config: dataId=aimin-drug-dev.properties, group=DEFAULT_GROUP
+[2025-03-06 03:58:38] INFO  com.alibaba.cloud.nacos.refresh.NacosContextRefresher 131 registerNacosListener - [Nacos Config] Listening config: dataId=aimin-drug, group=DEFAULT_GROUP
+[2025-03-06 03:58:38] INFO  com.alibaba.cloud.nacos.refresh.NacosContextRefresher 131 registerNacosListener - [Nacos Config] Listening config: dataId=aimin-drug-dev.yml, group=DEFAULT_GROUP
+[2025-03-06 04:08:51] INFO  org.springframework.boot.web.embedded.tomcat.GracefulShutdown 54 shutDownGracefully - Commencing graceful shutdown. Waiting for active requests to complete
+[2025-03-06 04:08:51] INFO  org.springframework.boot.web.embedded.tomcat.GracefulShutdown 76 doShutdown - Graceful shutdown complete
+[2025-03-06 04:08:51] INFO  com.alibaba.cloud.nacos.registry.NacosServiceRegistry 95 deregister - De-registering from Nacos Server now...
+[2025-03-06 04:08:51] INFO  com.alibaba.cloud.nacos.registry.NacosServiceRegistry 115 deregister - De-registration finished.
+[2025-03-06 04:08:51] INFO  com.alibaba.druid.pool.DruidDataSource 1880 close - {dataSource-1} closing ...
+[2025-03-06 04:08:51] INFO  com.alibaba.druid.pool.DruidDataSource 1953 close - {dataSource-1} closed
+[2025-03-06 04:09:01] INFO  org.springframework.cloud.bootstrap.config.PropertySourceBootstrapConfiguration 134 doInitialize - Located property source: [BootstrapPropertySource@589489519 {name='bootstrapProperties-aimin-drug-dev.properties,DEFAULT_GROUP', properties={}}, BootstrapPropertySource@11646065 {name='bootstrapProperties-aimin-drug.properties,DEFAULT_GROUP', properties={}}, BootstrapPropertySource@1383031847 {name='bootstrapProperties-aimin-drug,DEFAULT_GROUP', properties={}}]
+[2025-03-06 04:09:01] INFO  org.springframework.boot.SpringApplication 658 logStartupProfileInfo - The following 1 profile is active: "dev"
+[2025-03-06 04:09:02] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate 143 registerRepositoriesIn - Bootstrapping Spring Data Elasticsearch repositories in DEFAULT mode.
+[2025-03-06 04:09:02] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate 211 registerRepositoriesIn - Finished Spring Data repository scanning in 16 ms. Found 1 Elasticsearch repository interface.
+[2025-03-06 04:09:02] INFO  org.springframework.cloud.context.scope.GenericScope 282 setSerializationId - BeanFactory id=17ea027b-cce4-357f-b351-f88539e443e4
+[2025-03-06 04:09:02] INFO  com.github.yulichang.autoconfigure.MybatisPlusJoinAutoConfiguration 141 info - MPJ SqlSessionFactory bean definition: sqlSessionFactory factoryBeanName: com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration factoryMethodName: sqlSessionFactory source: com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration.sqlSessionFactory(javax.sql.DataSource)
+[2025-03-06 04:09:02] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer 111 initialize - Tomcat initialized with port 9002 (http)
+[2025-03-06 04:09:02] INFO  org.apache.juli.logging.DirectJDKLog 173 log - Starting service [Tomcat]
+[2025-03-06 04:09:02] INFO  org.apache.juli.logging.DirectJDKLog 173 log - Starting Servlet engine: [Apache Tomcat/10.1.33]
+[2025-03-06 04:09:02] INFO  org.apache.juli.logging.DirectJDKLog 173 log - Initializing Spring embedded WebApplicationContext
+[2025-03-06 04:09:02] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext 296 prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 587 ms
+[2025-03-06 04:09:02] INFO  com.github.yulichang.autoconfigure.MybatisPlusJoinAutoConfiguration 141 info - mybatis plus join properties config complete
+[2025-03-06 04:09:02] INFO  com.alibaba.druid.spring.boot3.autoconfigure.DruidDataSourceAutoConfigure 68 dataSource - Init DruidDataSource
+[2025-03-06 04:09:02] INFO  com.alibaba.druid.pool.DruidDataSource 673 init - {dataSource-1} inited
+[2025-03-06 04:09:02] INFO  com.github.yulichang.autoconfigure.MybatisPlusJoinAutoConfiguration 141 info - mybatis plus join SqlInjector init
+[2025-03-06 04:09:04] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer 243 start - Tomcat started on port 9002 (http) with context path '/aimin-drug'
+[2025-03-06 04:09:04] INFO  com.alibaba.nacos.plugin.auth.spi.client.ClientAuthPluginManager 56 init - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+[2025-03-06 04:09:04] INFO  com.alibaba.nacos.plugin.auth.spi.client.ClientAuthPluginManager 56 init - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+[2025-03-06 04:09:05] INFO  com.alibaba.cloud.nacos.registry.NacosServiceRegistry 76 register - nacos registry, DEFAULT_GROUP aimin-drug 192.168.101.101:9002 register finished
+[2025-03-06 04:09:05] INFO  org.springframework.boot.StartupInfoLogger 59 logStarted - Started AiminDrugApplication in 8.077 seconds (process running for 8.727)
+[2025-03-06 04:09:05] INFO  com.alibaba.cloud.nacos.refresh.NacosContextRefresher 131 registerNacosListener - [Nacos Config] Listening config: dataId=aimin-drug.properties, group=DEFAULT_GROUP
+[2025-03-06 04:09:05] INFO  com.alibaba.cloud.nacos.refresh.NacosContextRefresher 131 registerNacosListener - [Nacos Config] Listening config: dataId=aimin-drug-dev.properties, group=DEFAULT_GROUP
+[2025-03-06 04:09:05] INFO  com.alibaba.cloud.nacos.refresh.NacosContextRefresher 131 registerNacosListener - [Nacos Config] Listening config: dataId=aimin-drug, group=DEFAULT_GROUP
+[2025-03-06 04:09:05] INFO  com.alibaba.cloud.nacos.refresh.NacosContextRefresher 131 registerNacosListener - [Nacos Config] Listening config: dataId=aimin-drug-dev.yml, group=DEFAULT_GROUP

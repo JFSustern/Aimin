@@ -1,6 +1,6 @@
 package com.oimc.aimin.auth.service;
 
-import com.oimc.aimin.auth.entity.UserAccount;
+import com.oimc.aimin.auth.model.entity.UserAccount;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

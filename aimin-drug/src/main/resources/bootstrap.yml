@@ -1,84 +1,19 @@
 server:
-  port: 9002
+  port: 8082
   servlet:
     context-path: /aimin-drug
 
 spring:
   application:
     name: aimin-drug
-
   profiles:
     active: dev
-
-  cloud:
-    nacos:
-      server-addr: 8.141.30.139:8848
-      discovery:
-        namespace: c2b3b47a-098e-4609-91a8-3e97b59405cf
-        group: DEFAULT_GROUP
-      config:
-        namespace: c2b3b47a-098e-4609-91a8-3e97b59405cf
-        group: DEFAULT_GROUP
 
   config:
     import:
       - nacos:${spring.application.name}-${spring.profiles.active}.yml
-
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      url: jdbc:mysql://8.141.30.139:13306/aimin?characterEncoding=utf8&serverTimezone=Asia/Shanghai
-      username: root
-      password: 123456
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      filter:
-        slf4j:
-          enabled: true
-          statement-create-after-log-enabled: false
-          statement-close-after-log-enabled: false
-          result-set-open-after-log-enabled: false
-          result-set-close-after-log-enabled: false
-  data:
-    # redis配置
-    redis:
-      # Redis数据库索引（默认为0）
-      database: 1
-      # Redis服务器地址
-      host: 127.0.0.1
-      # Redis服务器连接端口
-      port: 6379
-      # 连接超时时间
-      timeout: 10s
-      lettuce:
-        pool:
-          # 连接池最大连接数
-          max-active: 200
-          # 连接池最大阻塞等待时间（使用负值表示没有限制）
-          max-wait: -1ms
-          # 连接池中的最大空闲连接
-          max-idle: 10
-          # 连接池中的最小空闲连接
-          min-idle: 0
-  elasticsearch:
-    uris: http://8.141.30.139:9200  # Elasticsearch 地址
-
-
-  rabbitmq:
-    host: 8.141.30.139
-    port: 5672
-
-
-logging:
-  level:
-    org:
-      springframework:
-        data:
-          elasticsearch: DEBUG
-      elasticsearch:
-        client:
-          RestClient: DEBUG
-
-mybatis-plus:
-  mapper-locations: classpath*:mapper/**/*.xml
-  configuration:
-    map-underscore-to-camel-case: true
+      - classpath:ds.yml
+      - classpath:es.yml
+      - classpath:redis.yml
+      - classpath:mq.yml
+      - classpath:base.yml

@@ -1,8 +1,7 @@
 package com.oimc.aimin.drug.mapper;
 
 import com.github.yulichang.base.MPJBaseMapper;
-import com.oimc.aimin.drug.entity.DrugImg;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.oimc.aimin.drug.model.entity.DrugImg;
 
 /**
  * <p>

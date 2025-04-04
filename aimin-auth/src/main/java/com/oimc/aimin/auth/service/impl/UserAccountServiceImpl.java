@@ -3,10 +3,11 @@ package com.oimc.aimin.auth.service.impl;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.oimc.aimin.auth.entity.UserAccount;
+import com.oimc.aimin.auth.model.entity.UserAccount;
 import com.oimc.aimin.auth.mapper.UserAccountMapper;
 import com.oimc.aimin.auth.service.UserAccountService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.oimc.aimin.satoken.user.StpUserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -44,8 +45,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper, UserA
 
     @Override
     public boolean updateAvatar(String avatarUrl) {
-        SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
-        String loginId = tokenInfo.getLoginId().toString();
+        String loginId = StpUserUtil.getLoginId();
         UserAccount userAccount = new UserAccount();
         userAccount.setOpenid(loginId);
         userAccount.setAvatar(avatarUrl);

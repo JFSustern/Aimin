@@ -1,7 +1,7 @@
 package com.oimc.aimin.auth.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.oimc.aimin.auth.entity.UserAccount;
+import com.oimc.aimin.auth.model.entity.UserAccount;
 
 /**
  * <p>

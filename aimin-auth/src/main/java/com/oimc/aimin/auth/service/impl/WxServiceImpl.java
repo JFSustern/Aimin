@@ -1,35 +1,27 @@
 package com.oimc.aimin.auth.service.impl;
 
 
-import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.SaTokenInfo;
-import cn.dev33.satoken.stp.StpUtil;
-import cn.dev33.satoken.util.SaResult;
-import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
-import com.oimc.aimin.auth.entity.UserAccount;
+import com.oimc.aimin.auth.model.entity.UserAccount;
 import com.oimc.aimin.auth.exception.BuildURLException;
-import com.oimc.aimin.auth.mapper.UserAccountMapper;
 import com.oimc.aimin.auth.service.UserAccountService;
 import com.oimc.aimin.auth.service.WxService;
-import com.oimc.aimin.auth.utils.ObjectConvertor;
 import com.oimc.aimin.auth.wx.pojo.AccessTokenResult;
 import com.oimc.aimin.auth.wx.pojo.Jscode2sessionResult;
 import com.oimc.aimin.auth.wx.service.WxMiniprogramService;
+import com.oimc.aimin.satoken.user.StpUserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
 public class WxServiceImpl implements WxService {
 
     private final WxMiniprogramService wxMiniprogramService;
+
     private final UserAccountService userAccountService;
 
-    private final static String DEVICE_MINIPROGRAM = "miniprogram";
     /**
      * 微信小程序登录接口。
      * 该方法实现通过微信小程序提供的 `code` 参数完成用户登录操作，具体流程如下：
@@ -57,17 +49,8 @@ public class WxServiceImpl implements WxService {
             userAccount.setOpenid(openid);
             userAccountService.save(userAccount);
         }
+        return StpUserUtil.loginByMiniProgram(openid);
 
-        // 如果用户未登录，则使用 openid 进行登录
-        if(!StpUtil.isLogin()){
-            SaLoginModel saLoginModel = new SaLoginModel();
-            saLoginModel.setDevice(DEVICE_MINIPROGRAM);
-            saLoginModel.setIsWriteHeader(false);
-            StpUtil.login(openid,saLoginModel);
-        }
-
-        // 返回当前用户的 Token 信息
-        return StpUtil.getTokenInfo();
     }
 
 

@@ -2,7 +2,7 @@ package com.oimc.aimin.auth.utils;
 
 
 import cn.dev33.satoken.stp.SaTokenInfo;
-import com.oimc.aimin.auth.controller.vo.MiniProgramLoginVO;
+import com.oimc.aimin.auth.model.vo.MiniProgramLoginVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 

@@ -1,0 +1,17 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /aimin-search
+
+spring:
+  application:
+    name: aimin-search
+  profiles:
+    active: dev
+
+  config:
+    import:
+      - nacos:${spring.application.name}-${spring.profiles.active}.yml
+      - classpath:es.yml
+      - classpath:base.yml
+

@@ -1,0 +1,44 @@
+[2025-02-15 17:32:53] DEBUG 142 statementLog - {conn-10001, pstmt-20000} created. SELECT     t.drug_id,t.name,t.generic_name,t.category_id,t.brand,t.manufacturer,t.description,t.dosage_form,t.strength,t.price,t.discount_price,t.stock_quantity,t.sku,t.bar_code,t.prescription_required,t.shelf_life,t.shelf_life_unit,t.storage_instructions,t.created_at,t.updated_at,t.status,t.is_deleted,c.category_id AS joina_category_id,c.name AS joina_name,c.parent_id,c.description AS joina_description,c.created_at AS joina_created_at,c.updated_at AS joina_updated_at   FROM t_drug  t    LEFT JOIN t_drug_categories c ON (c.category_id = t.category_id)
+[2025-02-15 17:32:53] DEBUG 142 statementLog - {conn-10001, pstmt-20000} Parameters : []
+[2025-02-15 17:32:53] DEBUG 142 statementLog - {conn-10001, pstmt-20000} Types : []
+[2025-02-15 17:32:53] DEBUG 142 statementLog - {conn-10001, pstmt-20000} executed. 43.2669 millis. SELECT     t.drug_id,t.name,t.generic_name,t.category_id,t.brand,t.manufacturer,t.description,t.dosage_form,t.strength,t.price,t.discount_price,t.stock_quantity,t.sku,t.bar_code,t.prescription_required,t.shelf_life,t.shelf_life_unit,t.storage_instructions,t.created_at,t.updated_at,t.status,t.is_deleted,c.category_id AS joina_category_id,c.name AS joina_name,c.parent_id,c.description AS joina_description,c.created_at AS joina_created_at,c.updated_at AS joina_updated_at   FROM t_drug  t    LEFT JOIN t_drug_categories c ON (c.category_id = t.category_id)
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20001} created. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20001} Parameters : [19]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20001} Types : [INTEGER]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20001} executed. 31.780201 millis. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20002} created. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20002} Parameters : [19]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20002} Types : [INTEGER]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20002} executed. 21.997899 millis. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20003} created. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20003} Parameters : [19]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20003} Types : [INTEGER]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20003} executed. 21.266799 millis. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20004} created. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20004} Parameters : [19]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20004} Types : [INTEGER]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20004} executed. 23.391499 millis. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20005} created. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20005} Parameters : [19]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20005} Types : [INTEGER]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20005} executed. 22.3183 millis. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20006} created. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20006} Parameters : [19]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20006} Types : [INTEGER]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20006} executed. 23.6515 millis. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20007} created. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20007} Parameters : [19]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20007} Types : [INTEGER]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20007} executed. 21.913299 millis. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20008} created. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20008} Parameters : [19]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20008} Types : [INTEGER]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20008} executed. 21.5881 millis. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20009} created. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20009} Parameters : [19]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20009} Types : [INTEGER]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20009} executed. 21.4322 millis. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20010} created. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20010} Parameters : [19]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20010} Types : [INTEGER]
+[2025-02-15 17:32:58] DEBUG 142 statementLog - {conn-10002, pstmt-20010} executed. 22.797401 millis. SELECT id,type_code,type_name,dict_code,dict_name,dict_value,sort_order,is_enabled,remark,create_time,update_time FROM t_dict WHERE id=?

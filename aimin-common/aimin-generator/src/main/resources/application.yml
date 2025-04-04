@@ -1,5 +1,5 @@
 mysql:
-  url: jdbc:mysql://8.141.30.139:3306/aimin?characterEncoding=utf8&serverTimezone=Asia/Shanghai
+  url: jdbc:mysql://8.141.30.139:13306/aimin?characterEncoding=utf8&serverTimezone=Asia/Shanghai
   username: root
   password: 123456
   author: zhage
