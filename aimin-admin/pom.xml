@@ -122,11 +122,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
         </dependency>
@@ -146,6 +141,11 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -159,32 +159,6 @@
                     <execution>
                         <goals>
                             <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>aspectj-maven-plugin</artifactId>
-                <version>1.15.0</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <complianceLevel>${java.version}</complianceLevel>
-                    <Xlint>ignore</Xlint>
-                    <encoding>UTF-8</encoding>
-                    <aspectLibraries>
-                        <aspectLibrary>
-                            <groupId>org.springframework</groupId>
-                            <artifactId>spring-aspects</artifactId>
-                        </aspectLibrary>
-                    </aspectLibraries>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
                         </goals>
                     </execution>
                 </executions>

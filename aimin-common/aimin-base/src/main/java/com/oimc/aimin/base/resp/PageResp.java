@@ -31,8 +31,8 @@ public class PageResp<L> extends BasePageResp<L>{
 
     }
 
-    public static <L> PageResp<L> of(int currentPage,int pageSize,  List<L> list, int total) {
-        PageResp<L> pageResponse = new PageResp<>();
+    public static <T> PageResp<T> of(int currentPage,int pageSize,  List<T> list, int total) {
+        PageResp<T> pageResponse = new PageResp<>();
         pageResponse.setCurrentPage(currentPage);
         pageResponse.setPageSize(pageSize);
         pageResponse.setList(list);

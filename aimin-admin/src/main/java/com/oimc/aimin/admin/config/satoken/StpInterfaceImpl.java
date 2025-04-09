@@ -3,8 +3,10 @@ package com.oimc.aimin.admin.config.satoken;
 import cn.dev33.satoken.stp.StpInterface;
 import cn.hutool.core.collection.CollUtil;
 import com.oimc.aimin.admin.common.constant.SysConstants;
+import com.oimc.aimin.admin.facade.PermissionFacadeService;
+import com.oimc.aimin.admin.facade.RoleFacadeService;
 import com.oimc.aimin.admin.service.PermissionService;
-import com.oimc.aimin.admin.service.RoleService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +23,12 @@ import java.util.Set;
 public class StpInterfaceImpl implements StpInterface {
 
     private final PermissionService permissionService;
-    private final RoleService roleService;
-    
+
+    private final RoleFacadeService roleFacadeService;
+
+    private final PermissionFacadeService permissionFacadeService;
+
+
     /**
      * 获取用户权限列表
      * 
@@ -33,11 +39,12 @@ public class StpInterfaceImpl implements StpInterface {
     @Override
     public List<String> getPermissionList(Object loginId, String loginType) {
         Integer adminId = Integer.parseInt(loginId.toString());
-        Set<String> roleCodeSet = roleService.getRoleCodesByAdminId(adminId);
+        Set<String> roleCodeSet = roleFacadeService.getRoleCodesByAdminId(adminId);
         if(roleCodeSet.contains(SysConstants.SUPER_ROLE_CODE)){
             return CollUtil.newArrayList(SysConstants.ALL_PERMISSION);
         }
-        Set<String> permCodes = permissionService.getPermCodesByAdminId(adminId);
+        // Set<String> permCodes = permissionService.getPermCodesByAdminId(adminId);
+        Set<String> permCodes = permissionFacadeService.getPermCodeByAdminId(adminId);
         return CollUtil.newArrayList(permCodes);
     }
 
@@ -52,7 +59,7 @@ public class StpInterfaceImpl implements StpInterface {
     @Override
     public List<String> getRoleList(Object loginId, String loginType) {
         Integer adminId = Integer.parseInt(loginId.toString());
-        Set<String> roles = roleService.getRoleCodesByAdminId(adminId);
+        Set<String> roles = roleFacadeService.getRoleCodesByAdminId(adminId);
         return CollUtil.newArrayList(roles);
     }
 }

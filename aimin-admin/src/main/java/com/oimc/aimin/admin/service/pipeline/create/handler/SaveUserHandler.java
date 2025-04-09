@@ -1,7 +1,7 @@
 package com.oimc.aimin.admin.service.pipeline.create.handler;
 
-import com.oimc.aimin.admin.mapper.AdminMapper;
 import com.oimc.aimin.admin.model.entity.Admin;
+import com.oimc.aimin.admin.service.AdminService;
 import com.oimc.aimin.admin.service.pipeline.create.AdminCreateHandler;
 import com.oimc.aimin.admin.service.pipeline.create.context.AdminCreateContext;
 import com.oimc.aimin.admin.utils.ObjectConvertor;
@@ -14,14 +14,14 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class SaveUserHandler implements AdminCreateHandler {
 
-    private final AdminMapper adminMapper;
+    private final AdminService adminService;
 
     private final ObjectConvertor objectConvertor;
 
     @Override
     public void handle(AdminCreateContext context) {
-        Admin admin = objectConvertor.adminContext2Entity(context);
-        adminMapper.insert(admin);
+        Admin admin = objectConvertor.toAdmin(context);
+        adminService.insert(admin);
     }
 
 }

@@ -79,7 +79,7 @@ public class AiminCache extends AbstractValueAdaptingCache {
      */
     private Map<String, ReentrantLock> keyLockMap = new ConcurrentHashMap<String, ReentrantLock>();
 
-    private final ReentrantLock[] lockArray = new ReentrantLock[32]; // 配置合适大小
+    private final ReentrantLock[] lockArray = new ReentrantLock[8]; // 配置合适大小
     
     // 初始化
     {
@@ -100,19 +100,19 @@ public class AiminCache extends AbstractValueAdaptingCache {
      * @param cacheName 缓存名称
      * @param level2Cache Redis缓存实例
      * @param level1Cache Caffeine缓存实例
-     * @param l2CacheConfig 缓存配置信息
+     * @param aiminCacheConfig 缓存配置信息
      */
     public AiminCache(String cacheName, L2RedisCache level2Cache,
-                      Cache<Object, Object> level1Cache, AiminCacheConfig l2CacheConfig) {
-        super(l2CacheConfig.isAllowNullValues());
+                      Cache<Object, Object> level1Cache, AiminCacheConfig aiminCacheConfig) {
+        super(aiminCacheConfig.isAllowNullValues());
         this.cacheName = cacheName;
         this.l2RedisCache = level2Cache;
         this.l1CaffeineCache = level1Cache;
-        this.defaultExpiration = l2CacheConfig.getRedis().getDefaultExpiration();
-        this.expires = l2CacheConfig.getRedis().getExpires();
-        this.topic = l2CacheConfig.getRedis().getTopic();
-        this.composite = l2CacheConfig.getComposite();
-        this.redisConfig = l2CacheConfig.getRedis();
+        this.defaultExpiration = aiminCacheConfig.getRedis().getDefaultExpiration();
+        this.expires = aiminCacheConfig.getRedis().getExpires();
+        this.topic = aiminCacheConfig.getRedis().getTopic();
+        this.composite = aiminCacheConfig.getComposite();
+        this.redisConfig = aiminCacheConfig.getRedis();
     }
 
     /**
@@ -157,6 +157,8 @@ public class AiminCache extends AbstractValueAdaptingCache {
     public String getName() {
         return this.cacheName;
     }
+
+
 
     /**
      * 获取底层缓存实现
@@ -236,7 +238,7 @@ public class AiminCache extends AbstractValueAdaptingCache {
      */
     @Override
     public void put(Object key, Object value) {
-        //如果value不能放空，但实际value为空，那么把数据情掉就好。
+        //如果value不能放空，但实际value为空，那么把数据情清掉就好。
         if (!super.isAllowNullValues() && value == null) {
             this.evict(key);
             return;
@@ -296,28 +298,6 @@ public class AiminCache extends AbstractValueAdaptingCache {
         }
     }
 
-    // old code
-/*    public ValueWrapper putIfAbsent(Object key, Object value) {
-        String cacheKey = getKey(key);
-        Object prevValue = null;
-        // 考虑使用分布式锁，或者将redis的setIfAbsent改为原子性操作
-        synchronized (key) {
-            prevValue = l2RedisCache.get(cacheKey);
-            if (prevValue == null) {
-                long expire = getExpire();
-                if (expire > 0) {
-                    l2RedisCache.set(getKey(key), toStoreValue(value), expire);
-                } else {
-                    l2RedisCache.set(getKey(key), toStoreValue(value));
-                }
-
-                push(new CacheMessage(this.cacheName, key));
-
-                l1CaffeineCache.put(key, toStoreValue(value));
-            }
-        }
-        return toValueWrapper(prevValue);
-    }*/
 
     /**
      * 移除缓存
@@ -329,9 +309,7 @@ public class AiminCache extends AbstractValueAdaptingCache {
     public void evict(Object key) {
         // 先清除redis中缓存数据，然后清除caffeine中的缓存，避免短时间内如果先清除caffeine缓存后其他请求会再从redis里加载到caffeine中
         l2RedisCache.delete(getKey(key));
-
         push(new CacheMessage(this.cacheName, key));
-
         l1CaffeineCache.invalidate(key);
 
     }

@@ -1,6 +1,6 @@
 package com.oimc.aimin.drug.model.req;
 
-import com.oimc.aimin.drug.common.Enums.DrugStatus;
+import com.oimc.aimin.base.enums.DrugStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

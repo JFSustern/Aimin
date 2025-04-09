@@ -3,17 +3,22 @@ package com.oimc.aimin.admin.service.impl;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeNodeConfig;
 import cn.hutool.core.lang.tree.TreeUtil;
-import com.github.yulichang.extension.mapping.base.MPJDeepService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.oimc.aimin.admin.model.entity.AdminRole;
 import com.oimc.aimin.admin.model.entity.Department;
 import com.oimc.aimin.admin.mapper.DepartmentMapper;
 import com.oimc.aimin.admin.service.DepartmentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -26,37 +31,81 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Department> implements DepartmentService, MPJDeepService<Department> {
+@Transactional
+public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Department> implements DepartmentService {
 
     public static final String CACHE_NAME = "dept";
 
+    
+    // 以下是BaseService接口方法的实现
+    
     @Override
-    //@Cacheable(value = CACHE_NAME, keyGenerator = "keyGen")
-    public List<Tree<Integer>> tree(Integer id) {
-        if (id == null){
-            id = 0;
-        }
-        List<Department> list = this.getList();
-        //配置
-        TreeNodeConfig treeNodeConfig = new TreeNodeConfig();
-        // 自定义属性名 都有默认值的
-        treeNodeConfig.setWeightKey("sort");
-        // 最大递归深度
-        treeNodeConfig.setDeep(4);
-
-        // List<Department> list = list();
-
-        return TreeUtil.build(list, id,treeNodeConfig, (node, tree) -> {
-            tree.setId(node.getId());
-            tree.setParentId(node.getParentId());
-            tree.setWeight(node.getSort());
-            tree.setName(node.getName());
-        });
-    }
-
     @Cacheable(value = CACHE_NAME, keyGenerator = "keyGen")
-    public List<Department> getList(){
+    public List<Department> getAll() {
         return list();
     }
 
+    @Override
+    @Cacheable(value = CACHE_NAME, keyGenerator = "keyGen")
+    public List<Department> deepGetAll() {
+        return listDeep(new LambdaQueryWrapper<Department>());
+    }
+
+    @Override
+    @Cacheable(value = CACHE_NAME, keyGenerator = "keyGen")
+    public List<Department> getByIds(Collection<Integer> ids) {
+        return listByIds(ids);
+    }
+
+    @Override
+    @Cacheable(value = CACHE_NAME, keyGenerator = "keyGen")
+    public List<Department> deepGetByIds(Collection<Integer> ids) {
+        return listByIdsDeep(ids);
+    }
+
+    @Override
+    @Cacheable(value = CACHE_NAME, keyGenerator = "keyGen")
+    public Department getById(Integer id) {
+        return super.getById(id);
+    }
+
+    @Override
+    @Cacheable(value = CACHE_NAME, keyGenerator = "keyGen")
+    public Department deepGetById(Integer id) {
+        return getByIdDeep(id);
+    }
+
+    @Override
+    @CacheEvict(value = CACHE_NAME, allEntries = true)
+    public void insert(Department department) {
+        save(department);
+    }
+
+    @Override
+    @CacheEvict(value = CACHE_NAME, allEntries = true)
+    public void insert(Collection<Department> departments) {
+        saveBatch(departments);
+    }
+
+    @Override
+    @CacheEvict(value = CACHE_NAME, allEntries = true)
+    public void update(Department department) {
+        updateById(department);
+    }
+
+    @Override
+    @CacheEvict(value = CACHE_NAME, allEntries = true)
+    public void delete(Integer id) {
+        removeById(id);
+    }
+
+    @Override
+    @CacheEvict(value = CACHE_NAME, allEntries = true)
+    public void delete(Collection<Integer> ids) {
+        removeByIds(ids);
+    }
+    @Override
+    public boolean isExists(Integer id) {
+        return count(new LambdaQueryWrapper<Department>().eq(Department::getId, id)) > 0;
+    }
 }

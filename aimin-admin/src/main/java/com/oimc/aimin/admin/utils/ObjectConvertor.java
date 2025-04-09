@@ -1,14 +1,20 @@
 package com.oimc.aimin.admin.utils;
 
+import com.oimc.aimin.admin.model.entity.Role;
+import com.oimc.aimin.admin.model.req.CreateRoleReq;
 import com.oimc.aimin.admin.model.req.PermissionReq;
+import com.oimc.aimin.admin.model.req.UpdateAdminReq;
+import com.oimc.aimin.admin.model.req.UpdateRoleReq;
+import com.oimc.aimin.admin.model.vo.PermissionVO;
+import com.oimc.aimin.admin.model.vo.RouterVO;
 import com.oimc.aimin.admin.service.pipeline.create.context.AdminCreateContext;
 import com.oimc.aimin.admin.model.entity.Permission;
 import com.oimc.aimin.admin.model.vo.AdminVO;
 import com.oimc.aimin.admin.model.entity.Admin;
-import com.oimc.aimin.admin.model.vo.PermissionVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.Mappings;
 
 import java.util.List;
 
@@ -16,15 +22,27 @@ import java.util.List;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ObjectConvertor {
 
-    List<AdminVO> adminList2VoList(List<Admin> adminList);
-
-    @Mapping(target = "roles", ignore=true)
-    AdminVO admin2VO(Admin admin);
+    AdminVO toAdminVO(Admin admin);
 
     @Mapping(source = "encryptedPassword", target = "password")
-    Admin adminContext2Entity(AdminCreateContext context);
+    Admin toAdmin(AdminCreateContext context);
 
-    List<PermissionVO> permissionList2VO(List<Permission> permissionList);
+    Admin toAdmin(UpdateAdminReq req);
 
-    Permission permissionReq2Entity(PermissionReq req);
+    Role toRole(CreateRoleReq req);
+
+    Role toRole(UpdateRoleReq req);
+
+    Permission toPermission(PermissionReq req);
+
+    List<PermissionVO> toPermissionVO(List<Permission> permissions);
+
+    PermissionVO toPermissionVO(Permission permission);
+
+    @Mappings({
+            @Mapping(source = "path", target = "meta.title"),
+            @Mapping(source = "icon", target = "meta.icon"),
+            @Mapping(source = "hidden", target = "meta.hidden"),
+    })
+    RouterVO toRouterVO(Permission permission);
 }

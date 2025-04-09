@@ -14,8 +14,6 @@ import java.util.List;
  * @author root
  * @since 2025/03/13
  */
-public interface DepartmentService {
-
-    List<Tree<Integer>> tree(Integer id);
+public interface DepartmentService extends BaseService<Department> {
 
 }

@@ -7,7 +7,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import com.oimc.aimin.drug.common.Enums.DrugStatus;
+
+import com.oimc.aimin.base.enums.DrugStatus;
 import com.oimc.aimin.ds.annotation.DictTranslate;
 import lombok.Data;
 

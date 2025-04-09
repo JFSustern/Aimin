@@ -1,6 +1,7 @@
 package com.oimc.aimin.cache.formal;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.benmanes.caffeine.cache.LoadingCache;
 import com.oimc.aimin.cache.formal.config.AiminCacheConfig;
 import com.oimc.aimin.cache.formal.util.L2RedisCache;
 import org.springframework.cache.Cache;
@@ -47,7 +48,7 @@ public class AiminCacheManager implements CacheManager {
     /**
      * 二级缓存配置
      */
-    private AiminCacheConfig l2CacheConfig;
+    private AiminCacheConfig aiminCacheConfig;
 
     /**
      * 获取指定名称的缓存实例
@@ -66,7 +67,7 @@ public class AiminCacheManager implements CacheManager {
             return cache;
         }
 
-        cache = new AiminCache(name, redisCache, caffeineCache(), l2CacheConfig);
+        cache = new AiminCache(name, redisCache, caffeineCache(), aiminCacheConfig);
         Cache oldCache = cacheMap.putIfAbsent(name, cache);
         return oldCache == null ? cache : oldCache;
     }
@@ -79,21 +80,21 @@ public class AiminCacheManager implements CacheManager {
      */
     @Override
     public Collection<String> getCacheNames() {
-        return List.of();
+        return cacheMap.keySet();
     }
 
     /**
      * 构造函数
      *
-     * @param l2CacheConfig 二级缓存配置
+     * @param aiminCacheConfig 二级缓存配置
      * @param redisCache Redis缓存工具类
      */
-    public AiminCacheManager(AiminCacheConfig l2CacheConfig, L2RedisCache redisCache) {
+    public AiminCacheManager(AiminCacheConfig aiminCacheConfig, L2RedisCache redisCache) {
         super();
-        this.l2CacheConfig = l2CacheConfig;
+        this.aiminCacheConfig = aiminCacheConfig;
         this.redisCache = redisCache;
-        this.dynamic = l2CacheConfig.isDynamic();
-        this.cacheNames = l2CacheConfig.getCacheNames();
+        this.dynamic = aiminCacheConfig.isDynamic();
+        this.cacheNames = aiminCacheConfig.getCacheNames();
     }
 
     /**
@@ -104,21 +105,23 @@ public class AiminCacheManager implements CacheManager {
      */
     public com.github.benmanes.caffeine.cache.Cache<Object, Object> caffeineCache(){
         Caffeine<Object, Object> cacheBuilder = Caffeine.newBuilder();
-        if(l2CacheConfig.getCaffeine().getExpireAfterAccess() > 0) {
-            cacheBuilder.expireAfterAccess(l2CacheConfig.getCaffeine().getExpireAfterAccess(), TimeUnit.SECONDS);
+        // 访问后过期时间(秒)
+        if(aiminCacheConfig.getCaffeine().getExpireAfterAccess() > 0) {
+            cacheBuilder.expireAfterAccess(aiminCacheConfig.getCaffeine().getExpireAfterAccess(), TimeUnit.SECONDS);
         }
-        if(l2CacheConfig.getCaffeine().getExpireAfterWrite() > 0) {
-            cacheBuilder.expireAfterWrite(l2CacheConfig.getCaffeine().getExpireAfterWrite(), TimeUnit.SECONDS);
+        // 写入后过期时间(秒)
+        if(aiminCacheConfig.getCaffeine().getExpireAfterWrite() > 0) {
+            cacheBuilder.expireAfterWrite(aiminCacheConfig.getCaffeine().getExpireAfterWrite(), TimeUnit.SECONDS);
         }
-        if(l2CacheConfig.getCaffeine().getInitialCapacity() > 0) {
-            cacheBuilder.initialCapacity(l2CacheConfig.getCaffeine().getInitialCapacity());
+        // 初始化大小
+        if(aiminCacheConfig.getCaffeine().getInitialCapacity() > 0) {
+            cacheBuilder.initialCapacity(aiminCacheConfig.getCaffeine().getInitialCapacity());
         }
-        if(l2CacheConfig.getCaffeine().getMaximumSize() > 0) {
-            cacheBuilder.maximumSize(l2CacheConfig.getCaffeine().getMaximumSize());
+        // 最大缓存对象个数
+        if(aiminCacheConfig.getCaffeine().getMaximumSize() > 0) {
+            cacheBuilder.maximumSize(aiminCacheConfig.getCaffeine().getMaximumSize());
         }
-        if(l2CacheConfig.getCaffeine().getRefreshAfterWrite() > 0) {
-            cacheBuilder.refreshAfterWrite(l2CacheConfig.getCaffeine().getRefreshAfterWrite(), TimeUnit.SECONDS);
-        }
+
         return cacheBuilder.build();
     }
 

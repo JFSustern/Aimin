@@ -32,8 +32,6 @@ import java.util.Objects;
 @AutoConfigureAfter(RedisConfiguration.class)
 @EnableConfigurationProperties(AiminCacheProperties.class)
 @RequiredArgsConstructor
-@EnableCaching(mode = AdviceMode.ASPECTJ)
-@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class AiminCacheAutoConfiguration {
 
     /**
@@ -65,9 +63,9 @@ public class AiminCacheAutoConfiguration {
      * @param l2RedisCache Redis缓存工具类
      * @return Aimin缓存管理器实例
      */
+    @Order(2)
     @Bean
     @ConditionalOnClass(L2RedisCache.class)
-    @Order(2)
     public AiminCacheManager cacheManager(L2RedisCache l2RedisCache) {
         return new AiminCacheManager(properties.getConfig(), l2RedisCache);
     }

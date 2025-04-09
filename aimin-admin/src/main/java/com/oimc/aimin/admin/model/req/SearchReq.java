@@ -16,5 +16,5 @@ public class SearchReq {
     private Integer pageSize;
 
     @Schema(description = "分页索引", example = "1")
-    private Integer pageIndex;
+    private Integer currentPage;
 }

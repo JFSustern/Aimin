@@ -13,8 +13,9 @@ import java.util.List;
  * @author root
  * @since 2025/02/27
  */
-public interface RolePermissionService extends MPJDeepService<RolePermission> {
+public interface RolePermissionService extends BaseService<RolePermission> {
 
-    void assignPermissionsToRole(Integer roleId, List<Integer> permissionIds);
+    void deleteByRoleId(Integer roleId);
 
+    List<RolePermission> getByPermId(Integer id);
 }

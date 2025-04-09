@@ -87,19 +87,10 @@ public class Admin implements Serializable {
     private Integer deptId;
 
     /**
-     * 角色列表
+     * 逻辑删除
      */
-    @TableField(exist = false)
-    @FieldMapping(tag = AdminRole.class, thisField = "id", joinField = "adminId", select = "roleId")
-    private List<Integer> roleIds;
-
-    @TableField(exist = false)
-    private List<Role> roles;
-    /**
-     * 部门信息
-     */
-    @TableField(exist = false)
-    private Department department;
+    @TableLogic
+    private Boolean deleted;
 
     /**
      * 部门信息
@@ -113,10 +104,19 @@ public class Admin implements Serializable {
     @TableField(exist = false)
     private List<Permission> permissions;
 
-    /**
-     * 逻辑删除
-     */
-    @TableLogic
-    private Boolean deleted;
 
+
+    @TableField(exist = false)
+    @FieldMapping(tag = AdminRole.class, thisField = "id", joinField = "adminId", select = "roleId")
+    private List<Integer> roleIds;
+
+    /**
+     * 部门信息
+     */
+    @TableField(exist = false)
+    @EntityMapping(thisField = "deptId", joinField = "id")
+    private Department department;
+
+    @TableField(exist = false)
+    private List<Role> roles;
 }

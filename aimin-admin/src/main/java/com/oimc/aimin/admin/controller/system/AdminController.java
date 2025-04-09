@@ -1,16 +1,13 @@
 package com.oimc.aimin.admin.controller.system;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.oimc.aimin.admin.facade.AdminFacadeService;
 import com.oimc.aimin.admin.service.pipeline.create.context.AdminCreateContext;
 import com.oimc.aimin.admin.model.req.CreateAdminReq;
 import com.oimc.aimin.admin.model.req.SearchReq;
 import com.oimc.aimin.admin.model.req.UpdateAdminReq;
 import com.oimc.aimin.admin.model.vo.AdminVO;
-import com.oimc.aimin.admin.model.entity.Admin;
-import com.oimc.aimin.admin.service.AdminService;
 import com.oimc.aimin.admin.service.pipeline.delete.context.AdminDelContext;
-import com.oimc.aimin.admin.utils.ObjectConvertor;
 import com.oimc.aimin.base.resp.PageResp;
 import com.oimc.aimin.base.resp.Result;
 import com.oimc.aimin.satoken.admin.StpAdminUtil;
@@ -18,11 +15,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 
 /**
  * 管理员控制器
@@ -34,9 +31,7 @@ import java.util.concurrent.ExecutionException;
 @RequestMapping("/system/admin")
 public class AdminController {
 
-    private final AdminService adminService;
-
-    private final ObjectConvertor objectConvertor;
+    private final AdminFacadeService adminFacadeService;
 
 
     /**
@@ -50,7 +45,7 @@ public class AdminController {
     @SaCheckPermission("system:user:add")
     @PostMapping
     public Result<?> createAdmin(@RequestBody @Valid CreateAdminReq createRequest){
-        adminService.add(new AdminCreateContext(createRequest));
+        adminFacadeService.add(new AdminCreateContext(createRequest));
         return Result.success();
     }
 
@@ -65,7 +60,7 @@ public class AdminController {
     @SaCheckPermission("system:user:delete")
     @DeleteMapping
     public Result<?> deleteAdmins(@RequestBody @NotEmpty Set<Integer> adminIds){
-        adminService.delete(new AdminDelContext(adminIds));
+        adminFacadeService.delete(new AdminDelContext(adminIds));
         return Result.success();
     }
 
@@ -80,7 +75,7 @@ public class AdminController {
     @SaCheckPermission("system:user:edit")
     @PutMapping
     public Result<?> updateAdmin(@RequestBody @Valid UpdateAdminReq updateRequest) {
-        adminService.updateAdminInfo(updateRequest);
+        adminFacadeService.updateAdminInfo(updateRequest);
         return Result.success();
     }
 
@@ -90,49 +85,38 @@ public class AdminController {
      *
      * @param searchRequest 搜索条件，包含关键字和分页信息
      * @return 分页的管理员列表
-     * @throws ExecutionException 执行异常
-     * @throws InterruptedException 中断异常
      */
     @Operation(summary = "搜索管理员", description = "根据条件分页查询管理员列表，支持关键字搜索和分页")
     @SaCheckPermission("system:user:list")
     @PostMapping("/search")
-    public Result<?> searchAdmins(@RequestBody SearchReq searchRequest) throws ExecutionException, InterruptedException {
-        Page<Admin> adminPage = adminService.search(searchRequest);
-        PageResp<AdminVO> response = PageResp.build(adminPage, AdminVO.class);
-        return Result.success(response);
+    public Result<?> searchAdmins(@RequestBody SearchReq searchRequest) {
+        PageResp<AdminVO> adminVOPageResp = adminFacadeService.pageSearchFuzzy(searchRequest);
+        return Result.success(adminVOPageResp);
     }
 
     /**
-     * 获取单个管理员详情
-     * 根据ID获取管理员的详细信息，包括关联的角色
-     * 
-     * @param id 管理员ID
-     * @return 管理员详情
+     *
+     * @return
      */
-    @Operation(summary = "获取管理员详情", description = "根据ID获取单个管理员的详细信息，包括基本资料和已分配角色")
+    @Operation(summary = "获取当前管理员详情", description = "获取当前管理员的详细信息，包括基本资料和已分配角色")
     @SaCheckPermission("system:user:info")
-    @GetMapping("/{id}")
-    public Result<?> getAdminDetail(@PathVariable Integer id) {
-        Admin admin = adminService.getAllInfoByAdminId(id);
+    @GetMapping
+    public Result<?> getCurrentAdminDetail() {
+        Integer aid = StpAdminUtil.getLoginId();
+        AdminVO admin = adminFacadeService.getAllInfoByAdminId(aid);
         return Result.success(admin);
     }
 
-    @GetMapping("/info")
-    public Result<?> info() {
-        Integer loginId = StpAdminUtil.getLoginId();
-        Admin admin = adminService.getAdminById(loginId);
-        AdminVO adminVO = objectConvertor.admin2VO(admin);
-        return Result.success(adminVO);
-    }
     /**
-     * 获取管理员信息
-     * 获取管理员的详细信息，包括基本信息和关联的角色
      *
-     * @return 管理员详情
+     * @return
      */
-    @GetMapping("/deep/{id}")
-    public Result<?> deep(@PathVariable("id") Integer id) {
-        Admin byIdDeep = adminService.getByIdDeep(id);
-        return Result.success(byIdDeep);
+    @Operation(summary = "根据管理员id获取详情", description = "根据ID获取单个管理员的详细信息，包括基本资料和已分配角色")
+    @SaCheckPermission("system:user:info")
+    @GetMapping("/{id}")
+    public Result<?> getAdminDetailById(@PathVariable("id") @NotNull Integer id) {
+        AdminVO admin = adminFacadeService.getAllInfoByAdminId(id);
+        return Result.success(admin);
     }
+
 }

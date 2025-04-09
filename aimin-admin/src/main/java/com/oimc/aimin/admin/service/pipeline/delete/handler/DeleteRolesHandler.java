@@ -1,8 +1,7 @@
 package com.oimc.aimin.admin.service.pipeline.delete.handler;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.oimc.aimin.admin.mapper.AdminRoleMapper;
-import com.oimc.aimin.admin.model.entity.AdminRole;
+import com.oimc.aimin.admin.service.AdminService;
 import com.oimc.aimin.admin.service.pipeline.delete.AdminDeleteHandler;
 import com.oimc.aimin.admin.service.pipeline.delete.context.AdminDelContext;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +21,12 @@ import java.util.Set;
 public class DeleteRolesHandler implements AdminDeleteHandler {
 
     private final AdminRoleMapper adminRoleMapper;
+    private final AdminService adminService;
 
     @Override
     public void handle(AdminDelContext context) {
         Set<Integer> adminIds = context.getAdminIds();
-        LambdaQueryWrapper<AdminRole> eq = new LambdaQueryWrapper<AdminRole>()
-                .in(AdminRole::getAdminId, adminIds);
-        adminRoleMapper.delete(eq);
+        adminService.deleteRelationRoles(adminIds);
+
     }
 }

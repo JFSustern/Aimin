@@ -17,6 +17,6 @@ public class AdminVO {
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
     private boolean gender;
-    private List<Role> roles;
-    private Department department;
+    private List<RoleVO> roles;
+    private DepartmentVO department;
 }

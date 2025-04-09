@@ -8,6 +8,7 @@ import com.oimc.aimin.admin.service.impl.CaptchaService;
 import com.oimc.aimin.base.resp.Result;
 import com.oimc.aimin.satoken.admin.StpAdminUtil;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class AuthController {
 
     @Operation
     @PostMapping("/token")
-    public Result<?> token(@RequestBody LoginReq login) {
+    public Result<?> token(@Valid @RequestBody LoginReq login) {
         Boolean verify = captchaService.verify(login.getCaptchaVerifyParam());
         LoginVO loginVO = new LoginVO();
         if (!verify) {

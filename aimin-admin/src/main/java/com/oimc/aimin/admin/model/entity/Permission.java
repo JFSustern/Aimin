@@ -8,7 +8,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
+import com.github.yulichang.annotation.EntityMapping;
 import com.oimc.aimin.admin.common.enums.EnableStatusEnum;
 import com.oimc.aimin.admin.common.enums.PermissionTypeEnum;
 import lombok.Data;
@@ -120,6 +122,11 @@ public class Permission implements Serializable {
     private LocalDateTime updateAt;
 
     @TableField(exist = false)
-    private Boolean hasChildren;
+    private boolean hasChildren;
+
+
+    @TableField(exist = false)
+    @EntityMapping(thisField = "id", joinField = "parentId")
+    private List<Permission> children;
 
 }

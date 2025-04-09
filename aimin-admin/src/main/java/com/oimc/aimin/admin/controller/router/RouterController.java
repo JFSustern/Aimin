@@ -1,5 +1,6 @@
 package com.oimc.aimin.admin.controller.router;
 
+import com.oimc.aimin.admin.facade.PermissionFacadeService;
 import com.oimc.aimin.admin.model.vo.RouterVO;
 import com.oimc.aimin.admin.service.PermissionService;
 import com.oimc.aimin.base.resp.Result;
@@ -17,7 +18,7 @@ import java.util.List;
 @RequestMapping("/auth/router")
 public class RouterController {
 
-    private final PermissionService permissionService;
+    private final PermissionFacadeService permissionFacadeService;
 
     /**
      * 获取当前登录管理员的路由信息
@@ -27,7 +28,7 @@ public class RouterController {
     @GetMapping("/list")
     public Result<?> list(){
         Integer adminId = StpAdminUtil.getLoginId();
-        List<RouterVO> routers = permissionService.getRoutersByAdminId(adminId);
+        List<RouterVO> routers = permissionFacadeService.getRoutersByAdminId(adminId);
         return Result.success(routers);
     }
 

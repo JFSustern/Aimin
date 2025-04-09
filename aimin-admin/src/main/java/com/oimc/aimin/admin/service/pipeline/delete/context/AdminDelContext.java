@@ -1,5 +1,6 @@
 package com.oimc.aimin.admin.service.pipeline.delete.context;
 
+import com.oimc.aimin.admin.model.entity.Admin;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -13,11 +14,11 @@ import java.util.*;
 @AllArgsConstructor
 public class AdminDelContext {
     private Set<Integer> adminIds;
-    private Map<Integer,List<Integer>> roleMap;
+    private List<Admin> adminList;
 
     public AdminDelContext(Set<Integer> adminIds){
         this.adminIds = adminIds;
-        this.roleMap = new HashMap<>();
+        this.adminList = new ArrayList<>();
     }
 
 }

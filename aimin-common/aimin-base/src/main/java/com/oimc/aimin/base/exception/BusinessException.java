@@ -1,14 +1,12 @@
 package com.oimc.aimin.base.exception;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import java.io.Serial;
 
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
-@AllArgsConstructor
 public class BusinessException extends RuntimeException {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -16,8 +14,10 @@ public class BusinessException extends RuntimeException {
     private String message;
 
     public static BusinessException of(String message) {
-
         return new BusinessException(message);
+    }
+    public  BusinessException (String message) {
+        this.message = message;
     }
 
 }

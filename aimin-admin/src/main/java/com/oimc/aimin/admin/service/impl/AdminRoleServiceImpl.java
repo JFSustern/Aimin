@@ -1,7 +1,6 @@
 package com.oimc.aimin.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.github.yulichang.extension.mapping.base.MPJDeepService;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import com.oimc.aimin.admin.model.entity.AdminRole;
 import com.oimc.aimin.admin.model.entity.Role;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -30,15 +28,14 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Exception.class)
-public class AdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRole> implements AdminRoleService, MPJDeepService<AdminRole> {
+public class AdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRole> implements AdminRoleService {
 
     private final RoleMapper roleMapper;
 
     private final static String CACHE_NAME = "admin_role";
 
-
     @Override
-    @Cacheable(value= CACHE_NAME, keyGenerator = "keyGen")
+    @Cacheable(value = CACHE_NAME, keyGenerator = "keyGen")
     public List<Role> getRoleListByAid(Integer adminId) {
         MPJLambdaWrapper<Role> wrapper = new MPJLambdaWrapper<Role>()
                 .selectAll(Role.class)
@@ -47,21 +44,77 @@ public class AdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRole
         return roleMapper.selectJoinList(Role.class, wrapper);
     }
 
+    
+    // 以下是BaseService接口方法的实现
+    
     @Override
-    @CacheEvict(value= CACHE_NAME, allEntries = true)
-    public void deleteByAdminId(Integer aid) {
-        LambdaQueryWrapper<AdminRole> eq = new LambdaQueryWrapper<AdminRole>()
-                .eq(AdminRole::getAdminId, aid);
-        remove(eq);
+    @Cacheable(value = CACHE_NAME, keyGenerator = "keyGen")
+    public List<AdminRole> getAll() {
+        return list();
     }
 
     @Override
-    @CacheEvict(value= CACHE_NAME, allEntries = true)
-    public void batchDeleteByAdminIds(Collection<Integer> aids) {
-        LambdaQueryWrapper<AdminRole> eq = new LambdaQueryWrapper<AdminRole>()
-                .in(AdminRole::getAdminId, aids);
-        remove(eq);
+    @Cacheable(value = CACHE_NAME, keyGenerator = "keyGen")
+    public List<AdminRole> deepGetAll() {
+        return listDeep(new LambdaQueryWrapper<AdminRole>());
     }
 
+    @Override
+    @Cacheable(value = CACHE_NAME, keyGenerator = "keyGen")
+    public List<AdminRole> getByIds(Collection<Integer> ids) {
+        return listByIds(ids);
+    }
 
+    @Override
+    @Cacheable(value = CACHE_NAME, keyGenerator = "keyGen")
+    public List<AdminRole> deepGetByIds(Collection<Integer> ids) {
+        return listByIdsDeep(ids);
+    }
+
+    @Override
+    @Cacheable(value = CACHE_NAME, keyGenerator = "keyGen")
+    public AdminRole getById(Integer id) {
+        return super.getById(id);
+    }
+
+    @Override
+    @Cacheable(value = CACHE_NAME, keyGenerator = "keyGen")
+    public AdminRole deepGetById(Integer id) {
+        return getByIdDeep(id);
+    }
+
+    @Override
+    @CacheEvict(value = CACHE_NAME, allEntries = true)
+    public void insert(AdminRole adminRole) {
+        save(adminRole);
+    }
+
+    @Override
+    @CacheEvict(value = CACHE_NAME, allEntries = true)
+    public void insert(Collection<AdminRole> adminRoles) {
+        saveBatch(adminRoles);
+    }
+
+    @Override
+    @CacheEvict(value = CACHE_NAME, allEntries = true)
+    public void update(AdminRole adminRole) {
+        updateById(adminRole);
+    }
+
+    @Override
+    @CacheEvict(value = CACHE_NAME, allEntries = true)
+    public void delete(Integer id) {
+        removeById(id);
+    }
+
+    @Override
+    @CacheEvict(value = CACHE_NAME, allEntries = true)
+    public void delete(Collection<Integer> ids) {
+        removeByIds(ids);
+    }
+
+    @Override
+    public boolean isExists(Integer id) {
+        return count(new LambdaQueryWrapper<AdminRole>().eq(AdminRole::getId, id)) > 0;
+    }
 }
