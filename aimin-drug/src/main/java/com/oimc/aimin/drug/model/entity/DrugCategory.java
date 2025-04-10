@@ -2,6 +2,7 @@ package com.oimc.aimin.drug.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,9 +18,10 @@ import lombok.Data;
  * @since 2024/12/29
  */
 @Data
-@TableName("t_drug_categories")
-public class DrugCategories implements Serializable {
+@TableName("t_drug_category")
+public class DrugCategory implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -38,7 +40,7 @@ public class DrugCategories implements Serializable {
      * 父级分类ID，用于支持多级分类
      */
     @TableField("parent_id")
-    private Long parentId;
+    private Integer parentId;
 
     /**
      * 分类描述，详细说明该分类的用途或特点

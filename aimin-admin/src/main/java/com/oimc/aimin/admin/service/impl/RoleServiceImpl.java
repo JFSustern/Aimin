@@ -2,19 +2,12 @@ package com.oimc.aimin.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import com.oimc.aimin.admin.mapper.RolePermissionMapper;
-import com.oimc.aimin.admin.model.entity.AdminRole;
 import com.oimc.aimin.admin.model.entity.Role;
-import com.oimc.aimin.admin.model.entity.RolePermission;
 import com.oimc.aimin.admin.mapper.RoleMapper;
-import com.oimc.aimin.admin.model.req.CreateRoleReq;
-import com.oimc.aimin.admin.model.req.RoleReq;
-import com.oimc.aimin.admin.model.req.UpdateRoleReq;
+import com.oimc.aimin.admin.model.request.RoleRequest;
 import com.oimc.aimin.admin.service.RoleService;
-import com.oimc.aimin.base.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -22,8 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -44,8 +35,22 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
 
 
     @Override
-    public boolean checkNameAndCodeUnique(UpdateRoleReq req) {
-        return false;
+    public boolean checkNameAndCodeUnique(RoleRequest req) {
+        LambdaQueryWrapper<Role> queryWrapper = new LambdaQueryWrapper<>();
+        
+        // 检查是否为更新操作
+        if (req.getId() != null) {
+            // 如果是更新，排除自身ID
+            queryWrapper.ne(Role::getId, req.getId());
+        }
+        
+        // 检查角色名称或角色编码是否已存在
+        queryWrapper.eq(Role::getRoleName, req.getRoleName())
+                .or()
+                .eq(Role::getRoleCode, req.getRoleCode());
+        
+        // 返回true表示唯一（不存在重复），false表示不唯一（存在重复）
+        return count(queryWrapper) == 0;
     }
 
 

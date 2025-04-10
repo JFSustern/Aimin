@@ -1,30 +1,23 @@
 package com.oimc.aimin.admin.service.impl;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
-import com.alibaba.nacos.common.utils.CollectionUtils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.oimc.aimin.admin.mapper.AdminRoleMapper;
 import com.oimc.aimin.admin.model.entity.AdminRole;
-import com.oimc.aimin.admin.model.req.LoginReq;
-import com.oimc.aimin.admin.model.req.UpdateAdminReq;
+import com.oimc.aimin.admin.model.request.AdminRequest;
+import com.oimc.aimin.admin.model.request.LoginRequest;
 import com.oimc.aimin.admin.model.entity.Admin;
 import com.oimc.aimin.admin.mapper.AdminMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.oimc.aimin.admin.service.AdminService;
 
-import com.oimc.aimin.admin.service.pipeline.create.AdminCreateHandler;
-import com.oimc.aimin.admin.service.pipeline.create.context.AdminCreateContext;
-import com.oimc.aimin.admin.service.pipeline.delete.AdminDeleteHandler;
-import com.oimc.aimin.admin.service.pipeline.delete.context.AdminDelContext;
 import com.oimc.aimin.admin.utils.PwdUtils;
 import com.oimc.aimin.base.exception.BusinessException;
 import com.oimc.aimin.satoken.admin.StpAdminUtil;
 import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.Cache;
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -51,7 +44,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     private final AdminRoleMapper adminRoleMapper;
 
     @Override
-    public SaTokenInfo login(LoginReq loginReq) {
+    public SaTokenInfo login(LoginRequest loginReq) {
         // 1. 使用LambdaQueryWrapper
         LambdaQueryWrapper<Admin> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Admin::getUsername, loginReq.getUsername());
@@ -181,7 +174,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     }
 
     @Override
-    public boolean checkPhoneUsernameUnique(UpdateAdminReq req) {
+    public boolean checkPhoneUsernameUnique(AdminRequest req) {
         LambdaQueryWrapper<Admin> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Admin::getUsername, req.getUsername())
                 .or()

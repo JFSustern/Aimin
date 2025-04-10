@@ -24,7 +24,6 @@ public class DrugVO implements Serializable {
     
     private String name;
 
-
     /**
      * 药品通用名，药品的标准学名
      */
@@ -93,7 +92,7 @@ public class DrugVO implements Serializable {
      * 是否需要处方，TRUE 表示需要，FALSE 表示不需要
      */
     
-    private Boolean prescriptionRequired;
+    private Boolean prescription;
 
     /**
      * 保质期长度

@@ -11,8 +11,7 @@ import com.oimc.aimin.admin.model.entity.Admin;
 import com.oimc.aimin.admin.model.entity.Permission;
 import com.oimc.aimin.admin.model.entity.Role;
 import com.oimc.aimin.admin.model.entity.RolePermission;
-import com.oimc.aimin.admin.model.req.PermissionReq;
-import com.oimc.aimin.admin.model.vo.PermissionVO;
+import com.oimc.aimin.admin.model.request.PermissionRequest;
 import com.oimc.aimin.admin.model.vo.RouterVO;
 import com.oimc.aimin.admin.service.AdminService;
 import com.oimc.aimin.admin.service.PermissionService;
@@ -105,7 +104,7 @@ public class PermissionFacadeService {
      * @return 权限ID
      */
     @Transactional
-    public Integer createOrUpdatePermission(PermissionReq req) {
+    public Integer createOrUpdatePermission(PermissionRequest req) {
         if(req.getId() != null){
             Permission permission = objectConvertor.toPermission(req);
             permissionService.update(permission);

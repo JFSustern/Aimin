@@ -16,13 +16,13 @@ public class CacheMessageListener implements MessageListener {
      * Redis缓存工具类
      * 用于反序列化接收到的消息
      */
-    private L2RedisCache l2RedisCache;
+    private final L2RedisCache l2RedisCache;
 
     /**
      * 缓存管理器
      * 用于清除本地缓存
      */
-    private AiminCacheManager aiminCacheManager;
+    private final AiminCacheManager aiminCacheManager;
 
     /**
      * 构造函数

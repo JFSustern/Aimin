@@ -1,4 +1,4 @@
-package com.oimc.aimin.drug.service;
+package com.oimc.aimin.cache.formal.service;
 
 import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;

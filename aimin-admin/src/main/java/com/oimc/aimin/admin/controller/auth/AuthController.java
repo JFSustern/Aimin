@@ -1,7 +1,7 @@
 package com.oimc.aimin.admin.controller.auth;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
-import com.oimc.aimin.admin.model.req.LoginReq;
+import com.oimc.aimin.admin.model.request.LoginRequest;
 import com.oimc.aimin.admin.model.vo.LoginVO;
 import com.oimc.aimin.admin.service.AdminService;
 import com.oimc.aimin.admin.service.impl.CaptchaService;
@@ -25,7 +25,7 @@ public class AuthController {
 
     @Operation
     @PostMapping("/token")
-    public Result<?> token(@Valid @RequestBody LoginReq login) {
+    public Result<?> token(@Valid @RequestBody LoginRequest login) {
         Boolean verify = captchaService.verify(login.getCaptchaVerifyParam());
         LoginVO loginVO = new LoginVO();
         if (!verify) {

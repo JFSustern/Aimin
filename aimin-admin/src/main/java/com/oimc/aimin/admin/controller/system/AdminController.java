@@ -3,9 +3,8 @@ package com.oimc.aimin.admin.controller.system;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.oimc.aimin.admin.facade.AdminFacadeService;
 import com.oimc.aimin.admin.service.pipeline.create.context.AdminCreateContext;
-import com.oimc.aimin.admin.model.req.CreateAdminReq;
-import com.oimc.aimin.admin.model.req.SearchReq;
-import com.oimc.aimin.admin.model.req.UpdateAdminReq;
+import com.oimc.aimin.admin.model.request.AdminRequest;
+import com.oimc.aimin.admin.model.request.PageRequest;
 import com.oimc.aimin.admin.model.vo.AdminVO;
 import com.oimc.aimin.admin.service.pipeline.delete.context.AdminDelContext;
 import com.oimc.aimin.base.resp.PageResp;
@@ -44,7 +43,7 @@ public class AdminController {
     @Operation(summary = "创建管理员", description = "创建一个新的管理员账号，包括设置基本信息和分配角色权限")
     @SaCheckPermission("system:user:add")
     @PostMapping
-    public Result<?> createAdmin(@RequestBody @Valid CreateAdminReq createRequest){
+    public Result<?> createAdmin(@RequestBody @Valid AdminRequest createRequest){
         adminFacadeService.add(new AdminCreateContext(createRequest));
         return Result.success();
     }
@@ -68,14 +67,14 @@ public class AdminController {
      * 更新管理员信息
      * 更新管理员的基本信息或角色分配
      *
-     * @param updateRequest 更新管理员的请求对象，包含ID和需要更新的字段
+     * @param request 更新管理员的请求对象，包含ID和需要更新的字段
      * @return 操作结果
      */
     @Operation(summary = "更新管理员", description = "更新管理员信息，可包括基本资料修改和角色重新分配")
     @SaCheckPermission("system:user:edit")
     @PutMapping
-    public Result<?> updateAdmin(@RequestBody @Valid UpdateAdminReq updateRequest) {
-        adminFacadeService.updateAdminInfo(updateRequest);
+    public Result<?> updateAdmin(@RequestBody @Valid AdminRequest request) {
+        adminFacadeService.updateAdminInfo(request);
         return Result.success();
     }
 
@@ -89,7 +88,7 @@ public class AdminController {
     @Operation(summary = "搜索管理员", description = "根据条件分页查询管理员列表，支持关键字搜索和分页")
     @SaCheckPermission("system:user:list")
     @PostMapping("/search")
-    public Result<?> searchAdmins(@RequestBody SearchReq searchRequest) {
+    public Result<?> searchAdmins(@RequestBody PageRequest searchRequest) {
         PageResp<AdminVO> adminVOPageResp = adminFacadeService.pageSearchFuzzy(searchRequest);
         return Result.success(adminVOPageResp);
     }

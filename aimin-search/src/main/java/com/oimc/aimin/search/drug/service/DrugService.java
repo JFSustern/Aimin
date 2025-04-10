@@ -7,7 +7,7 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.oimc.aimin.base.resp.PageResp;
 import com.oimc.aimin.search.drug.constants.DrugHighlightFields;
 import com.oimc.aimin.search.drug.model.index.DrugIndex;
-import com.oimc.aimin.search.drug.model.req.DrugPageReq;
+import com.oimc.aimin.search.drug.model.request.DrugPageRequest;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -50,7 +50,7 @@ public class DrugService {
      * @param request 请求参数
      * @return
      */
-    public PageResp<DrugIndex> pageQuery(DrugPageReq request) {
+    public PageResp<DrugIndex> pageQuery(DrugPageRequest request) {
         NativeQueryBuilder nativeQueryBuilder = new NativeQueryBuilder();
         if (StrUtil.isNotBlank(request.getKeyword())) {
             nativeQueryBuilder.withQuery(queryBuilder ->
@@ -65,11 +65,12 @@ public class DrugService {
         NativeQuery nativeQuery = nativeQueryBuilder.build();
         SearchHits<DrugIndex> searchHits = elasticsearchTemplate.search(nativeQuery, DrugIndex.class);
         List<DrugIndex> list = searchHits.stream().map(SearchHit::getContent).toList();
+
         return PageResp.of(request.getCurrentPage(), request.getPageSize(), list, (int)searchHits.getTotalHits());
 
     }
 
-    public PageResp<DrugIndex> lightQuery(@Valid DrugPageReq request) {
+    public PageResp<DrugIndex> lightQuery(@Valid DrugPageRequest request) {
         HighlightQuery highlightQuery = buildHighlightQuery();
         NativeQuery nativeQuery = new NativeQueryBuilder()
                 .withQuery(query ->

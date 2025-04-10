@@ -2,9 +2,8 @@ package com.oimc.aimin.admin.controller.system;
 
 import cn.hutool.core.lang.tree.Tree;
 import com.oimc.aimin.admin.model.entity.Permission;
-import com.oimc.aimin.admin.model.req.PermissionReq;
+import com.oimc.aimin.admin.model.request.PermissionRequest;
 import com.oimc.aimin.admin.facade.PermissionFacadeService;
-import com.oimc.aimin.admin.model.vo.PermissionVO;
 import com.oimc.aimin.admin.service.PermissionService;
 import com.oimc.aimin.base.resp.Result;
 import io.swagger.v3.oas.annotations.Operation;
@@ -67,7 +66,7 @@ public class PermissionController {
      */
     @Operation(summary = "更新/创建权限", description = "更新权限信息，如ID不存在则创建新权限")
     @PutMapping
-    public Result<?> addOrUpdate(@RequestBody @Valid PermissionReq req) {
+    public Result<?> addOrUpdate(@RequestBody @Valid PermissionRequest req) {
         Integer permissionId = permissionFacadeService.createOrUpdatePermission(req);
         return Result.success(permissionId);
     }

@@ -1,6 +1,8 @@
 package com.oimc.aimin.cache.formal.util;
 
 import cn.hutool.json.JSONObject;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.*;
@@ -11,31 +13,12 @@ import java.util.concurrent.TimeUnit;
  * 封装了Redis的常用操作，提供了更便捷的接口
  * 作为二级缓存的实现，负责与Redis交互
  */
+@Setter
+@Getter
 public class L2RedisCache {
 
-    /**
-     * Redis操作模板
-     * Spring封装的Redis操作核心类
-     */
+
     private RedisTemplate<String, Object> redisTemplate;
-
-    /**
-     * 获取Redis操作模板
-     * 
-     * @return Redis操作模板
-     */
-    public RedisTemplate getRedisTemplate() {
-        return redisTemplate;
-    }
-
-    /**
-     * 设置Redis操作模板
-     * 
-     * @param redisTemplate Redis操作模板
-     */
-    public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
 
     /**
      * 向Redis中设置键值对，并指定过期时间
@@ -97,8 +80,7 @@ public class L2RedisCache {
      * @return 字段值，不存在则返回null
      */
     public Object hashSelectOne(String key, String filed) {
-        Object result = redisTemplate.opsForHash().get(key, filed);
-        return result;
+        return redisTemplate.opsForHash().get(key, filed);
     }
 
     /**
@@ -147,8 +129,7 @@ public class L2RedisCache {
      * @return 添加成功的元素数量
      */
     public Long setAdd(String key, Object value) {
-        Long result = redisTemplate.opsForSet().add(key, value);
-        return result;
+        return redisTemplate.opsForSet().add(key, value);
     }
 
     /**
@@ -158,8 +139,7 @@ public class L2RedisCache {
      * @return 所有元素组成的集合
      */
     public Set getSetData(String key) {
-        Set resultSet = redisTemplate.opsForSet().members(key);
-        return resultSet;
+        return redisTemplate.opsForSet().members(key);
     }
 
     /**
@@ -170,9 +150,7 @@ public class L2RedisCache {
      * @return 是否存在
      */
     public boolean isValiDateSet(String key, Object value) {
-        boolean resultBl = false;
-        resultBl = redisTemplate.opsForSet().isMember(key, value);
-        return resultBl;
+        return Boolean.TRUE.equals(redisTemplate.opsForSet().isMember(key, value));
     }
 
     /**
@@ -183,8 +161,7 @@ public class L2RedisCache {
      * @return 交集集合
      */
     public Set intersect(String key1, String key2) {
-        Set resultSet = redisTemplate.opsForSet().intersect(key1, key2);
-        return resultSet;
+        return redisTemplate.opsForSet().intersect(key1, key2);
     }
     
     /**
@@ -195,8 +172,7 @@ public class L2RedisCache {
      * @return 并集集合
      */
     public Set unionSet(String key1, String key2) {
-        Set resultSet = redisTemplate.opsForSet().union(key1, key2);
-        return resultSet;
+        return redisTemplate.opsForSet().union(key1, key2);
     }
     
     /**

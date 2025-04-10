@@ -1,6 +1,6 @@
 package com.oimc.aimin.admin.service.pipeline.create.context;
 
-import com.oimc.aimin.admin.model.req.CreateAdminReq;
+import com.oimc.aimin.admin.model.request.AdminRequest;
 import lombok.Data;
 
 
@@ -15,7 +15,7 @@ public class AdminCreateContext {
     private Integer deptId;
 
     // createAdminModel 入参的构造函数
-    public AdminCreateContext(CreateAdminReq model) {
+    public AdminCreateContext(AdminRequest model) {
         this.username = model.getUsername();
         this.phone = model.getPhone();
         this.password = model.getPassword();

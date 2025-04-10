@@ -1,5 +1,6 @@
-package com.oimc.aimin.admin.model.req;
+package com.oimc.aimin.admin.model.request;
 
+import com.oimc.aimin.admin.model.request.groups.Update;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -7,8 +8,10 @@ import lombok.Data;
 
 @Data
 @Schema(description = "创建角色参数")
-public class CreateRoleReq {
+public class RoleRequest {
 
+    @NotBlank(message = "角色名称不能为空", groups = { Update.class })
+    private Integer id;
     /**
      * 角色名称
      */

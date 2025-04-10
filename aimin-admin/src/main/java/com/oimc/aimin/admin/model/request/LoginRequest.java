@@ -1,4 +1,4 @@
-package com.oimc.aimin.admin.model.req;
+package com.oimc.aimin.admin.model.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Schema(description = "登录参数")
-public class LoginReq {
+public class LoginRequest {
     @Schema(description = "用户名", example = "admin")
     @NotBlank(message = "用户名不能为空")
     private String username;

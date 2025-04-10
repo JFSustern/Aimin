@@ -3,8 +3,7 @@ package com.oimc.aimin.admin.facade;
 import com.oimc.aimin.admin.model.entity.Admin;
 import com.oimc.aimin.admin.model.entity.Role;
 import com.oimc.aimin.admin.model.entity.RolePermission;
-import com.oimc.aimin.admin.model.req.CreateRoleReq;
-import com.oimc.aimin.admin.model.req.UpdateRoleReq;
+import com.oimc.aimin.admin.model.request.RoleRequest;
 import com.oimc.aimin.admin.service.AdminRoleService;
 import com.oimc.aimin.admin.service.AdminService;
 import com.oimc.aimin.admin.service.RolePermissionService;
@@ -48,7 +47,7 @@ public class RoleFacadeService {
      * @param req 创建角色请求对象
      * @return 新创建的角色ID
      */
-    public Integer createRole(CreateRoleReq req) {
+    public Integer createRole(RoleRequest req) {
         boolean exists = roleService.isExists(req.getRoleName(), req.getRoleCode());
         if (exists) {
             throw new RuntimeException("角色名称或角色编码已存在");
@@ -76,18 +75,18 @@ public class RoleFacadeService {
     /**
      * 更新角色信息
      *
-     * @param req 更新角色请求对象
+     * @param request 更新角色请求对象
      */
-    public void updateRole(UpdateRoleReq req) {
-        Role role = roleService.getById(req.getId());
+    public void updateRole(RoleRequest request) {
+        Role role = roleService.getById(request.getId());
         if (role == null) {
             throw new RuntimeException("角色不存在");
         }
-        boolean unique = roleService.checkNameAndCodeUnique(req);
+        boolean unique = roleService.checkNameAndCodeUnique(request);
         if (!unique) {
             throw new RuntimeException("角色名称或角色编码已存在");
         }
-        Role coverRole = objectConvertor.toRole(req);
+        Role coverRole = objectConvertor.toRole(request);
         roleService.update(coverRole);
     }
 

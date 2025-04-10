@@ -1,6 +1,7 @@
-package com.oimc.aimin.admin.model.req;
+package com.oimc.aimin.admin.model.request;
 
 import com.oimc.aimin.admin.common.enums.PermissionTypeEnum;
+import com.oimc.aimin.admin.model.request.groups.Save;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,7 +10,7 @@ import lombok.Data;
 
 @Data
 @Schema(description = "创建权限参数")
-public class PermissionReq {
+public class PermissionRequest {
 
 
     @Schema(description = "id", example = "1")
@@ -18,7 +19,7 @@ public class PermissionReq {
     /**
      * 权限名称
      */
-    @NotBlank(message = "权限名称不能为空")
+    @NotBlank(message = "权限名称不能为空", groups = { Save.class })
     @Size(max = 50, message = "权限名称长度不能超过50个字符")
     @Schema(description = "权限名称", example = "用户管理")
     private String title;
@@ -26,7 +27,7 @@ public class PermissionReq {
     /**
      * 权限类型（1-目录，2-菜单，3-按钮）
      */
-    @NotNull(message = "权限类型不能为空")
+    @NotNull(message = "权限类型不能为空",groups = { Save.class })
     @Schema(description = "权限类型（1-目录，2-菜单，3-按钮）", example = "按钮")
     private PermissionTypeEnum permType;
 

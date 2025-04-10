@@ -1,12 +1,8 @@
 package com.oimc.aimin.admin.service;
 
 import com.oimc.aimin.admin.model.entity.Role;
-import com.oimc.aimin.admin.model.req.CreateRoleReq;
-import com.oimc.aimin.admin.model.req.RoleReq;
-import com.oimc.aimin.admin.model.req.UpdateRoleReq;
+import com.oimc.aimin.admin.model.request.RoleRequest;
 
-import java.util.List;
-import java.util.Set;
 
 /**
  * <p>
@@ -21,5 +17,5 @@ public interface RoleService extends BaseService<Role> {
 
     boolean isExists(String roleName, String roleCode);
 
-    boolean checkNameAndCodeUnique(UpdateRoleReq req);
+    boolean checkNameAndCodeUnique(RoleRequest req);
 }

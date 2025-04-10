@@ -1,15 +1,23 @@
-package com.oimc.aimin.admin.model.req;
+package com.oimc.aimin.admin.model.request;
 
+import com.oimc.aimin.admin.model.request.groups.Update;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.List;
+
 
 @Data
-@Schema(description = "创建Admin参数")
-public class CreateAdminReq {
+@Schema(description = "Admin参数")
+public class AdminRequest {
+
+    @Schema(description = "管理员ID")
+    @NotNull(message = "管理员ID不能为空", groups = { Update.class })
+    private Integer aid;
 
     // 用户名字段，必须非空且长度在3到50个字符之间
     @NotBlank(message = "用户名不能为空")
@@ -37,6 +45,15 @@ public class CreateAdminReq {
     @Schema(description = "手机号")
     private String phone;
 
+    @Schema(description = "状态")
+    private Boolean status;
+
     @Schema(description = "部门id")
     private Integer deptId;
+
+    @Schema(description = "角色ID列表")
+    private List<Integer> roleIds;
+
+    @Schema(description = "描述信息")
+    private String description;
 }

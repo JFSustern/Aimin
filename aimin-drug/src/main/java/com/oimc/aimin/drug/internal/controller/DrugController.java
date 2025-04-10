@@ -1,19 +1,26 @@
 package com.oimc.aimin.drug.internal.controller;
 
+import cn.hutool.core.lang.tree.Tree;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.oimc.aimin.base.request.drug.DrugCategoryRequest;
+import com.oimc.aimin.base.request.drug.DrugRequest;
+import com.oimc.aimin.base.request.drug.PageDrugRequest;
+import com.oimc.aimin.base.resp.PageResp;
 import com.oimc.aimin.base.resp.Result;
 import com.oimc.aimin.drug.model.entity.Drug;
-import com.oimc.aimin.drug.model.req.DrugReq;
+import com.oimc.aimin.drug.model.entity.DrugCategory;
+import com.oimc.aimin.drug.facade.DrugFacadeService;
+import com.oimc.aimin.drug.model.vo.DrugVO;
+import com.oimc.aimin.drug.service.DrugCategoryService;
 import com.oimc.aimin.drug.service.DrugService;
 import com.oimc.aimin.drug.utils.ObjectConvertor;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * 药品管理控制器
@@ -27,6 +34,10 @@ public class DrugController {
 
     private final DrugService drugService;
 
+    private final DrugFacadeService drugFacadeService;
+
+    private final DrugCategoryService drugCategoryService;
+
     private final ObjectConvertor objectConvertor;
     /**
      * 创建药品
@@ -37,7 +48,7 @@ public class DrugController {
      */
     @Operation(summary = "新增药品", description = "添加新的药品记录")
     @PostMapping
-    public Result<?> insert(@RequestBody @Valid DrugReq drug) {
+    public Result<?> insert(@RequestBody @Valid DrugRequest drug) {
         Drug entity = objectConvertor.toDrug(drug);
         drugService.cacheInsert(entity);
         return Result.success(entity.getDrugId());
@@ -66,8 +77,8 @@ public class DrugController {
      */
     @Operation(summary = "更新药品", description = "更新指定ID的药品信息")
     @PutMapping
-    public Result<?> batchUpdate(@RequestBody @Valid List<DrugReq> drug) {
-        List<Drug> drugList = objectConvertor.toDrugList(drug);
+    public Result<?> batchUpdate(@RequestBody @Valid List<DrugRequest> drug) {
+        List<Drug> drugList = objectConvertor.toDrug(drug);
         drugService.cacheUpdate(drugList);
         return Result.success();
     }
@@ -80,10 +91,40 @@ public class DrugController {
     }
 
     @Operation(summary = "查询全部药品", description = "查询全部药品")
-    @GetMapping("/list")
+    @GetMapping
     public Result<?> getByIds() {
         List<Drug> drugs = drugService.cacheGetAll();
         return Result.success(drugs);
+    }
+
+    @Operation(summary = "分页查询药品", description = "分页获取药品列表")
+    @PostMapping("/page")
+    public Result<?> pageDrugs(@RequestBody PageDrugRequest page) {
+        Page<Drug> drugPage = drugService.pageSearchFuzzy(page);
+        PageResp<DrugVO> drugVOPageResp = PageResp.build(drugPage, DrugVO.class);
+        return Result.success(drugVOPageResp);
+    }
+
+    @Operation(summary = "获取药品类别树", description = "获取药品分类的树形结构，可指定根节点ID")
+    @GetMapping("/category/tree/{id}")
+    public Result<List<Tree<Integer>>> tree(@PathVariable Integer id){
+        List<Tree<Integer>> tree = drugFacadeService.getCategoryTree(id);
+        return Result.success(tree);
+    }
+
+    @Operation(summary = "查询全部药品分类", description = "查询全部药品分类")
+    @GetMapping("/category")
+    public Result<?> categoryList() {
+        List<DrugCategory> drugCategories = drugCategoryService.cacheGetAll();
+        return Result.success(drugCategories);
+    }
+
+    @Operation(summary = "查询全部药品分类", description = "查询全部药品分类")
+    @PostMapping("/category")
+    public Result<?> insertCategory(@RequestBody DrugCategoryRequest request) {
+        DrugCategory drugCategory = objectConvertor.toDrugCategory(request);
+        drugCategoryService.cacheInsert(drugCategory);
+        return Result.success(drugCategory.getCategoryId());
     }
 
 }

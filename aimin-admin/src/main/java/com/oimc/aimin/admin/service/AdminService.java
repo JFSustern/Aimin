@@ -2,10 +2,9 @@ package com.oimc.aimin.admin.service;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.oimc.aimin.admin.model.req.LoginReq;
-import com.oimc.aimin.admin.model.req.UpdateAdminReq;
+import com.oimc.aimin.admin.model.request.AdminRequest;
+import com.oimc.aimin.admin.model.request.LoginRequest;
 import com.oimc.aimin.admin.model.entity.Admin;
-import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 import java.util.Set;
@@ -20,7 +19,7 @@ import java.util.Set;
  */
 public interface AdminService extends BaseService<Admin>{
 
-    SaTokenInfo login(LoginReq login);
+    SaTokenInfo login(LoginRequest login);
 
     Page<Admin> searchFuzzyWithDept(String content, Set<Integer> deptIds, Integer currentPage,Integer pageSize);
 
@@ -28,7 +27,7 @@ public interface AdminService extends BaseService<Admin>{
 
     void deleteRelationRoles(Set<Integer> adminId);
 
-    boolean checkPhoneUsernameUnique(UpdateAdminReq req);
+    boolean checkPhoneUsernameUnique(AdminRequest req);
 
     void updateRelationRoles(Integer aid, List<Integer> roleIds);
 }

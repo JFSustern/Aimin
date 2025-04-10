@@ -1,4 +1,4 @@
-package com.oimc.aimin.admin.model.req;
+package com.oimc.aimin.admin.model.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Schema(description = "图形验证参数")
-public class CaptchaVerifyReq {
+public class CaptchaVerifyRequest {
 
     /**
      * 用于存储验证码验证所需参数的字符串变量

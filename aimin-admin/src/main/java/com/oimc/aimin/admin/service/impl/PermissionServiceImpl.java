@@ -1,22 +1,14 @@
 package com.oimc.aimin.admin.service.impl;
 
-import cn.hutool.core.lang.tree.Tree;
-import cn.hutool.core.lang.tree.TreeNodeConfig;
-import cn.hutool.core.lang.tree.TreeUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
-import com.oimc.aimin.admin.common.constant.PermissionConstants;
 import com.oimc.aimin.admin.common.enums.EnableStatusEnum;
 import com.oimc.aimin.admin.model.entity.*;
 import com.oimc.aimin.admin.mapper.PermissionMapper;
-import com.oimc.aimin.admin.mapper.RolePermissionMapper;
-import com.oimc.aimin.admin.model.req.PermissionReq;
-import com.oimc.aimin.admin.model.vo.RouterVO;
 import com.oimc.aimin.admin.service.PermissionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.oimc.aimin.admin.utils.ObjectConvertor;
-import com.oimc.aimin.base.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;

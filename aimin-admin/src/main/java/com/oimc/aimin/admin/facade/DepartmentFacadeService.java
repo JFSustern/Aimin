@@ -48,7 +48,6 @@ public class DepartmentFacadeService {
             tree.setWeight(node.getSort());
             tree.setName(node.getName());
         });
-
     }
 
 } 

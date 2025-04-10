@@ -1,4 +1,5 @@
-package com.oimc.aimin.drug.model.req;
+package com.oimc.aimin.base.request.drug;
+
 
 import com.oimc.aimin.base.enums.DrugStatus;
 import jakarta.validation.constraints.NotBlank;
@@ -10,11 +11,12 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
-public class DrugReq implements Serializable {
-
+public class DrugRequest implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
+
+    private Integer id;
 
     // 药品名称，不能为空或空白
     @NotBlank(message = "药品名称不能为空")

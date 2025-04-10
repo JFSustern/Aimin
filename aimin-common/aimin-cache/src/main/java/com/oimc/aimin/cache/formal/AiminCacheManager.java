@@ -25,13 +25,13 @@ public class AiminCacheManager implements CacheManager {
      * 缓存实例映射表，用于存储已创建的缓存实例
      * key为缓存名称，value为缓存实例
      */
-    private ConcurrentMap<String, Cache> cacheMap = new ConcurrentHashMap<String, Cache>();
+    private final ConcurrentMap<String, Cache> cacheMap = new ConcurrentHashMap<String, Cache>();
 
     /**
      * 允许创建的缓存名称集合
      * 当dynamic=false时，只有此集合中的缓存名称才允许被创建
      */
-    private Set<String> cacheNames;
+    private final Set<String> cacheNames;
     
     /**
      * 是否允许动态创建缓存
@@ -43,12 +43,12 @@ public class AiminCacheManager implements CacheManager {
     /**
      * Redis缓存工具类
      */
-    private L2RedisCache redisCache;
+    private final L2RedisCache redisCache;
     
     /**
      * 二级缓存配置
      */
-    private AiminCacheConfig aiminCacheConfig;
+    private final AiminCacheConfig aiminCacheConfig;
 
     /**
      * 获取指定名称的缓存实例

@@ -1,10 +1,9 @@
 package com.oimc.aimin.admin.utils;
 
 import com.oimc.aimin.admin.model.entity.Role;
-import com.oimc.aimin.admin.model.req.CreateRoleReq;
-import com.oimc.aimin.admin.model.req.PermissionReq;
-import com.oimc.aimin.admin.model.req.UpdateAdminReq;
-import com.oimc.aimin.admin.model.req.UpdateRoleReq;
+import com.oimc.aimin.admin.model.request.AdminRequest;
+import com.oimc.aimin.admin.model.request.PermissionRequest;
+import com.oimc.aimin.admin.model.request.RoleRequest;
 import com.oimc.aimin.admin.model.vo.PermissionVO;
 import com.oimc.aimin.admin.model.vo.RouterVO;
 import com.oimc.aimin.admin.service.pipeline.create.context.AdminCreateContext;
@@ -27,13 +26,13 @@ public interface ObjectConvertor {
     @Mapping(source = "encryptedPassword", target = "password")
     Admin toAdmin(AdminCreateContext context);
 
-    Admin toAdmin(UpdateAdminReq req);
+    Admin toAdmin(AdminRequest req);
 
-    Role toRole(CreateRoleReq req);
+    Role toRole(RoleRequest req);
 
-    Role toRole(UpdateRoleReq req);
+    Role toRole(AdminRequest req);
 
-    Permission toPermission(PermissionReq req);
+    Permission toPermission(PermissionRequest req);
 
     List<PermissionVO> toPermissionVO(List<Permission> permissions);
 

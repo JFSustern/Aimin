@@ -3,11 +3,10 @@ package com.oimc.aimin.admin.facade;
 import com.alibaba.nacos.common.utils.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.oimc.aimin.admin.model.entity.Admin;
-import com.oimc.aimin.admin.model.entity.AdminRole;
 import com.oimc.aimin.admin.model.entity.Department;
 import com.oimc.aimin.admin.model.entity.Role;
-import com.oimc.aimin.admin.model.req.SearchReq;
-import com.oimc.aimin.admin.model.req.UpdateAdminReq;
+import com.oimc.aimin.admin.model.request.AdminRequest;
+import com.oimc.aimin.admin.model.request.PageRequest;
 import com.oimc.aimin.admin.model.vo.AdminVO;
 import com.oimc.aimin.admin.service.AdminRoleService;
 import com.oimc.aimin.admin.service.AdminService;
@@ -75,7 +74,7 @@ public class AdminFacadeService {
     }
 
     @Transactional
-    public void updateAdminInfo(UpdateAdminReq req){
+    public void updateAdminInfo(AdminRequest req){
         Integer adminId = req.getAid();
         Admin byId = adminService.getById(adminId);
         if (byId == null) {
@@ -98,7 +97,7 @@ public class AdminFacadeService {
      * @param req SearchReq
      * @return PageResp<AdminVO>
      */
-    public PageResp<AdminVO> pageSearchFuzzy(SearchReq req){
+    public PageResp<AdminVO> pageSearchFuzzy(PageRequest req){
         Set<Integer> childrenIds = extractChildrenIds(req.getDeptId());
         Page<Admin> adminPage = adminService.searchFuzzyWithDept(req.getContent(), childrenIds,req.getCurrentPage(), req.getPageSize());
         return PageResp.build(adminPage, AdminVO.class);

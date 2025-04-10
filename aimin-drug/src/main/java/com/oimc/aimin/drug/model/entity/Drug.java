@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
+import com.github.yulichang.annotation.FieldMapping;
 import com.oimc.aimin.base.enums.DrugStatus;
 import com.oimc.aimin.ds.annotation.DictTranslate;
 import lombok.Data;
@@ -50,6 +51,10 @@ public class Drug implements Serializable {
      */
     @TableField("category_id")
     private Integer categoryId;
+
+    @TableField(exist = false)
+    @FieldMapping(tag= DrugCategory.class, thisField = "categoryId", joinField = "categoryId", select = "name")
+    private String categoryName;
 
     /**
      * 品牌名称，例如“辉瑞”
@@ -164,5 +169,5 @@ public class Drug implements Serializable {
     private Boolean deleted;
 
     @TableField(exist = false)
-    private DrugCategories categories;
+    private DrugCategory categories;
 }

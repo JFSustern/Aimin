@@ -1,8 +1,7 @@
 package com.oimc.aimin.admin.controller.system;
 
-import com.oimc.aimin.admin.model.req.CreateRoleReq;
+import com.oimc.aimin.admin.model.request.RoleRequest;
 import com.oimc.aimin.admin.model.entity.Role;
-import com.oimc.aimin.admin.model.req.UpdateRoleReq;
 import com.oimc.aimin.admin.facade.RoleFacadeService;
 import com.oimc.aimin.admin.service.RoleService;
 import com.oimc.aimin.base.resp.Result;
@@ -12,6 +11,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -39,7 +39,7 @@ public class RoleController {
      */
     @Operation(summary = "添加角色", description = "添加新角色，返回新角色的ID")
     @PostMapping
-    public Result<?> add(@Valid @RequestBody CreateRoleReq req) {
+    public Result<?> add(@Valid @RequestBody RoleRequest req) {
         Integer roleId = roleFacadeService.createRole(req);
         return Result.success(roleId);
     }
@@ -60,13 +60,13 @@ public class RoleController {
     /**
      * 更新角色
      *
-     * @param req 更新角色请求
+     * @param request 更新角色请求
      * @return 操作结果
      */
     @Operation(summary = "更新角色", description = "更新角色信息，包括角色名称、编码、描述和状态")
     @PutMapping
-    public Result<?> update(@Valid @RequestBody UpdateRoleReq req) {
-        roleFacadeService.updateRole(req);
+    public Result<?> update(@Validated @RequestBody RoleRequest request) {
+        roleFacadeService.updateRole(request);
         return Result.success();
     }
 
