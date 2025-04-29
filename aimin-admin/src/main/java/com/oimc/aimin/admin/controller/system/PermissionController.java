@@ -5,7 +5,7 @@ import com.oimc.aimin.admin.model.entity.Permission;
 import com.oimc.aimin.admin.model.request.PermissionRequest;
 import com.oimc.aimin.admin.facade.PermissionFacadeService;
 import com.oimc.aimin.admin.service.PermissionService;
-import com.oimc.aimin.base.resp.Result;
+import com.oimc.aimin.base.response.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -60,14 +60,26 @@ public class PermissionController {
     }
 
     /**
+     * 更新权限
+     * @param req 权限创建请求
+     * @return 新创建的权限ID
+     */
+    @Operation(summary = "更新权限", description = "更新权限信息，如ID不存在则创建新权限")
+    @PutMapping
+    public Result<?> update(@RequestBody @Valid PermissionRequest req) {
+        Integer permissionId = permissionFacadeService.updatePermission(req);
+        return Result.success(permissionId);
+    }
+
+    /**
      * 创建权限
      * @param req 权限创建请求
      * @return 新创建的权限ID
      */
-    @Operation(summary = "更新/创建权限", description = "更新权限信息，如ID不存在则创建新权限")
-    @PutMapping
-    public Result<?> addOrUpdate(@RequestBody @Valid PermissionRequest req) {
-        Integer permissionId = permissionFacadeService.createOrUpdatePermission(req);
+    @Operation(summary = "创建权限", description = "创建权限信息")
+    @PostMapping
+    public Result<?> create(@RequestBody @Valid PermissionRequest req) {
+        Integer permissionId = permissionFacadeService.createPermission(req);
         return Result.success(permissionId);
     }
 

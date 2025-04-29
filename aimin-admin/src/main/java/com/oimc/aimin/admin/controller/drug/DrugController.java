@@ -4,10 +4,11 @@ import com.oimc.aimin.admin.feign.DrugFeignClient;
 import com.oimc.aimin.base.request.drug.DrugCategoryRequest;
 import com.oimc.aimin.base.request.drug.DrugRequest;
 import com.oimc.aimin.base.request.drug.PageDrugRequest;
-import com.oimc.aimin.base.resp.Result;
+import com.oimc.aimin.base.response.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class DrugController {
      */
     @Operation(summary = "创建药品", description = "添加新的药品记录")
     @PostMapping
-    public Result<?> createDrug(@RequestBody DrugRequest drug) {
+    public Result<?> createDrug(@RequestBody @Validated DrugRequest drug) {
         return drugFeignClient.insert(drug);
     }
 
@@ -44,7 +45,7 @@ public class DrugController {
      * @return 操作结果
      */
     @Operation(summary = "批量删除药品", description = "根据ID集合批量删除药品记录")
-    @DeleteMapping
+    @PostMapping("/batchDelete")
     public Result<?> batchDeleteDrugs(@RequestBody List<Integer> ids) {
         return drugFeignClient.batchDelete(ids);
     }
@@ -57,7 +58,7 @@ public class DrugController {
      */
     @Operation(summary = "更新药品", description = "批量更新指定药品的信息")
     @PutMapping
-    public Result<?> updateDrugs(@RequestBody List<DrugRequest> drugs) {
+    public Result<?> updateDrugs(@RequestBody DrugRequest drugs) {
         return drugFeignClient.update(drugs);
     }
 

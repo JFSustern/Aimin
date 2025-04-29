@@ -2,9 +2,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      url: jdbc:mysql://rm-2zeu4x1450e1g7xl75o.mysql.rds.aliyuncs.com:3306/aimin?characterEncoding=utf8&serverTimezone=Asia/Shanghai
-      username: root
-      password: kingks()16
+      url: ${MYSQL_URL}
+      username: ${MYSQL_USERNAME}
+      password: ${MYSQL_PASSWORD}
       driver-class-name: com.mysql.cj.jdbc.Driver
       filter:
         slf4j:

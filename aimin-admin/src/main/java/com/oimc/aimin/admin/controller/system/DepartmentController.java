@@ -2,7 +2,7 @@ package com.oimc.aimin.admin.controller.system;
 
 import cn.hutool.core.lang.tree.Tree;
 import com.oimc.aimin.admin.facade.DepartmentFacadeService;
-import com.oimc.aimin.base.resp.Result;
+import com.oimc.aimin.base.response.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

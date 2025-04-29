@@ -1,13 +1,12 @@
 package com.oimc.aimin.drug.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
-
-import lombok.Data;
 
 /**
  * <p>

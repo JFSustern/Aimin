@@ -39,7 +39,7 @@ public interface ObjectConvertor {
     PermissionVO toPermissionVO(Permission permission);
 
     @Mappings({
-            @Mapping(source = "path", target = "meta.title"),
+            @Mapping(source = "title", target = "meta.title"),
             @Mapping(source = "icon", target = "meta.icon"),
             @Mapping(source = "hidden", target = "meta.hidden"),
     })

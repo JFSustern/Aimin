@@ -18,7 +18,10 @@ import com.oimc.aimin.admin.service.PermissionService;
 import com.oimc.aimin.admin.service.RolePermissionService;
 import com.oimc.aimin.admin.service.RoleService;
 import com.oimc.aimin.admin.utils.ObjectConvertor;
+import com.oimc.aimin.base.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.WordUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -104,26 +107,52 @@ public class PermissionFacadeService {
      * @return 权限ID
      */
     @Transactional
-    public Integer createOrUpdatePermission(PermissionRequest req) {
+    public Integer updatePermission(PermissionRequest req) {
         if(req.getId() != null){
             Permission permission = objectConvertor.toPermission(req);
+            String[] split = permission.getPermKey().split(":");
+            StringBuilder name = new StringBuilder();
+            for(String s : split){
+                if(StringUtils.isNotBlank(s)){
+                    name.append(StringUtils.capitalize(s));
+                }
+            }
+            permission.setName(name.toString());
             permissionService.update(permission);
             return permission.getId();
         }
+        throw new BusinessException("权限ID不能为空");
+    }
+
+    public Integer createPermission(PermissionRequest req) {
         boolean existsByPermKey = permissionService.isExistsByPermKey(req.getPermKey());
         if(existsByPermKey){
-            throw new RuntimeException("权限标识已存在");
+            throw new BusinessException("权限标识已存在");
         }
-        boolean parentExists = permissionService.isExists(req.getParentId());
-        if(!parentExists){
-            throw new RuntimeException("父权限不存在");
+        Integer parentId = req.getParentId();
+        if(null != parentId){
+            boolean parentExists = permissionService.isExists(req.getParentId());
+            if(!parentExists){
+                throw new BusinessException("父权限不存在");
+            }
         }
+
         Permission permission = objectConvertor.toPermission(req);
         permission.setParentId(req.getParentId() != null ? req.getParentId() : 0);
         permission.setStatus(EnableStatusEnum.ENABLE);
+        String[] split = req.getPermKey().split(":");
+        StringBuilder name = new StringBuilder();
+        for(String s : split){
+            if(StringUtils.isNotBlank(s)){
+                name.append(StringUtils.capitalize(s));
+            }
+        }
+        permission.setName(name.toString());
         permissionService.insert(permission);
         return permission.getId();
     }
+
+
 
     public Set<String> getPermCodeByAdminId(Integer adminId){
         List<Permission> permissionList = getPermissionByAdminId(adminId);
@@ -263,6 +292,4 @@ public class PermissionFacadeService {
         }
         return routers;
     }
-
-
 }

@@ -60,4 +60,10 @@ public class DrugServiceImpl extends ServiceImpl<DrugMapper, Drug> implements Dr
         return pageDeep(drugPage, queryWrapper);
 
     }
+
+    @Override
+    public boolean isExist(Integer drugId) {
+        LambdaQueryWrapper<Drug> eq = new LambdaQueryWrapper<Drug>().eq(Drug::getDrugId, drugId);
+        return drugsMapper.exists(eq);
+    }
 }

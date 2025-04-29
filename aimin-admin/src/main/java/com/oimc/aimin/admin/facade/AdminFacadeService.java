@@ -18,7 +18,7 @@ import com.oimc.aimin.admin.service.pipeline.delete.AdminDeleteHandler;
 import com.oimc.aimin.admin.service.pipeline.delete.context.AdminDelContext;
 import com.oimc.aimin.admin.utils.ObjectConvertor;
 import com.oimc.aimin.base.exception.BusinessException;
-import com.oimc.aimin.base.resp.PageResp;
+import com.oimc.aimin.base.response.PageResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

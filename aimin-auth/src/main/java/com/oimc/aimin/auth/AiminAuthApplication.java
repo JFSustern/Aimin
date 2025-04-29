@@ -11,5 +11,4 @@ public class AiminAuthApplication {
     public static void main(String[] args) {
         SpringApplication.run(AiminAuthApplication.class, args);
     }
-
 }

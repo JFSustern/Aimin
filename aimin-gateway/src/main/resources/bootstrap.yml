@@ -41,6 +41,11 @@ spring:
           predicates:
             - Path=/aimin-admin/**
 
+        - id: aimin-search-server
+          uri: lb://aimin-search
+          predicates:
+            - Path=/aimin-search/**
+
 security:
   ignore:
     whites:

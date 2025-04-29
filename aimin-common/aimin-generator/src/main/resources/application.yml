@@ -1,6 +1,6 @@
 mysql:
-  url: jdbc:mysql://8.141.30.139:13306/aimin?characterEncoding=utf8&serverTimezone=Asia/Shanghai
-  username: root
-  password: 123456
+  url: ${MYSQL_URL}
+  username: ${MYSQL_USERNAME}
+  password: ${MYSQL_PASSWORD}
   author: zhage
   packageParent: com.oimc.aimin.drug

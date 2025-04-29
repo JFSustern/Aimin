@@ -16,6 +16,6 @@ import org.apache.ibatis.annotations.Select;
 
 public interface DrugCategoriesMapper extends MPJBaseMapper<DrugCategory> {
 
-    @Select("SELECT * FROM t_drug_categories WHERE category_id = #{categoryId}")
+    @Select("SELECT * FROM t_drug_category WHERE category_id = #{categoryId}")
     DrugCategory selectById(Integer categoryId);
 }

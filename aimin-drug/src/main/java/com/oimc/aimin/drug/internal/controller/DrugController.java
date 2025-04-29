@@ -2,13 +2,13 @@ package com.oimc.aimin.drug.internal.controller;
 
 import cn.hutool.core.lang.tree.Tree;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.oimc.aimin.drug.model.entity.Drug;
+import com.oimc.aimin.drug.model.entity.DrugCategory;
 import com.oimc.aimin.base.request.drug.DrugCategoryRequest;
 import com.oimc.aimin.base.request.drug.DrugRequest;
 import com.oimc.aimin.base.request.drug.PageDrugRequest;
-import com.oimc.aimin.base.resp.PageResp;
-import com.oimc.aimin.base.resp.Result;
-import com.oimc.aimin.drug.model.entity.Drug;
-import com.oimc.aimin.drug.model.entity.DrugCategory;
+import com.oimc.aimin.base.response.PageResp;
+import com.oimc.aimin.base.response.Result;
 import com.oimc.aimin.drug.facade.DrugFacadeService;
 import com.oimc.aimin.drug.model.vo.DrugVO;
 import com.oimc.aimin.drug.service.DrugCategoryService;
@@ -49,9 +49,8 @@ public class DrugController {
     @Operation(summary = "新增药品", description = "添加新的药品记录")
     @PostMapping
     public Result<?> insert(@RequestBody @Valid DrugRequest drug) {
-        Drug entity = objectConvertor.toDrug(drug);
-        drugService.cacheInsert(entity);
-        return Result.success(entity.getDrugId());
+        drugFacadeService.insertDrug(drug);
+        return Result.success();
     }
 
     /**
@@ -72,14 +71,13 @@ public class DrugController {
      * 更新药品信息
      * 根据ID更新药品的信息
      *
-     * @param drug 药品更新信息
+     * @param request 药品更新信息
      * @return 操作结果
      */
     @Operation(summary = "更新药品", description = "更新指定ID的药品信息")
     @PutMapping
-    public Result<?> batchUpdate(@RequestBody @Valid List<DrugRequest> drug) {
-        List<Drug> drugList = objectConvertor.toDrug(drug);
-        drugService.cacheUpdate(drugList);
+    public Result<?> batchUpdate(@RequestBody @Valid DrugRequest request) {
+        drugFacadeService.updateDrug(request);
         return Result.success();
     }
 

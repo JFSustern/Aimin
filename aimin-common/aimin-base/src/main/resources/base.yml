@@ -1,7 +1,7 @@
 spring:
   cloud:
     nacos:
-      server-addr: 8.141.30.139:8848
+      server-addr: ${NACOS_SERVER_ADDR}
       discovery:
         namespace: c2b3b47a-098e-4609-91a8-3e97b59405cf
         group: DEFAULT_GROUP

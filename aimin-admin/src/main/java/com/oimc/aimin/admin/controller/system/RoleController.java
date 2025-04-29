@@ -4,7 +4,7 @@ import com.oimc.aimin.admin.model.request.RoleRequest;
 import com.oimc.aimin.admin.model.entity.Role;
 import com.oimc.aimin.admin.facade.RoleFacadeService;
 import com.oimc.aimin.admin.service.RoleService;
-import com.oimc.aimin.base.resp.Result;
+import com.oimc.aimin.base.response.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

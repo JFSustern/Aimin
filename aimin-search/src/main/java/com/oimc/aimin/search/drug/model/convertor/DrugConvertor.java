@@ -1,7 +1,7 @@
 package com.oimc.aimin.search.drug.model.convertor;
 
 
-import com.oimc.aimin.search.drug.model.index.DrugIndex;
+import com.oimc.aimin.base.model.drug.index.DrugIndex;
 import com.oimc.aimin.search.drug.model.vo.DrugVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -19,5 +19,6 @@ public interface DrugConvertor {
      * @return
      */
     List<DrugVO> index2VO(List<DrugIndex> drugIndices);
+
 
 }

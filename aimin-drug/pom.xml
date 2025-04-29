@@ -35,12 +35,12 @@
 
         <dependency>
             <groupId>com.oimc</groupId>
-            <artifactId>aimin-ds</artifactId>
+            <artifactId>aimin-es</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.oimc</groupId>
-            <artifactId>aimin-es</artifactId>
+            <artifactId>aimin-ds</artifactId>
         </dependency>
 
         <dependency>
@@ -56,6 +56,56 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.oimc</groupId>
+            <artifactId>aimin-file</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.otter</groupId>
+            <artifactId>canal.client</artifactId>
+            <version>1.1.8</version>
+            <!--  <exclusions>
+                  <exclusion>
+                      <groupId>org.apache.rocketmq</groupId>
+                      <artifactId>rocketmq-client</artifactId>
+                  </exclusion>
+                  <exclusion>
+                      <groupId>org.springframework.boot</groupId>
+                      <artifactId>spring-boot-starter-logging</artifactId>
+                  </exclusion>
+                  <exclusion>
+                      <groupId>ch.qos.logback</groupId>
+                      <artifactId>logback-classic</artifactId>
+                  </exclusion>
+              </exclusions>-->
+        </dependency>
+        <!--不手动引入会报找不到com.alibaba.otter.canal.protocol.Message-->
+        <dependency>
+            <groupId>com.alibaba.otter</groupId>
+            <artifactId>canal.protocol</artifactId>
+            <version>1.1.8</version>
+            <!--  <exclusions>
+                  <exclusion>
+                      <groupId>org.apache.rocketmq</groupId>
+                      <artifactId>rocketmq-client</artifactId>
+                  </exclusion>
+                  <exclusion>
+                      <groupId>org.springframework.boot</groupId>
+                      <artifactId>spring-boot-starter-logging</artifactId>
+                  </exclusion>
+                  <exclusion>
+                      <groupId>ch.qos.logback</groupId>
+                      <artifactId>logback-classic</artifactId>
+                  </exclusion>
+              </exclusions>-->
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.otter</groupId>
+            <artifactId>canal.common</artifactId>
+            <version>1.1.8</version> <!-- 必须与客户端版本一致 -->
         </dependency>
 
     </dependencies>

@@ -49,8 +49,8 @@ public interface DrugMapper extends MPJBaseMapper<Drug> {
             "c.description, \n" +
             "c.created_at, \n" +
             "c.updated_at \n" +
-            "FROM t_drugs d \n" +
-            "LEFT JOIN t_drug_categories c ON d.category_id = c.category_id ")
+            "FROM t_drug d \n" +
+            "LEFT JOIN t_drug_category c ON d.category_id = c.category_id ")
     @Results({
             @Result(property = "drugId", column = "drug_id", id = true),
             @Result(property = "categories", column = "category_id",

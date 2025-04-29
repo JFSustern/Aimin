@@ -19,7 +19,8 @@ spring:
       - classpath:ds.yml
 
 
+# 申请微信小程序测试号即可，https://developers.weixin.qq.com/miniprogram/dev/devtools/sandbox.html
 wx:
-  appid: wx9568bdfc5d43d6ed
-  secret: 1d623de8e508759374afe10b888fb122
+  appid: ${WX_APPID}
+  secret: ${WX_SECRET}
 

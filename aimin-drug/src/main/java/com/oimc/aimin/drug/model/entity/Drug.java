@@ -1,17 +1,17 @@
 package com.oimc.aimin.drug.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.github.yulichang.annotation.EntityMapping;
+import com.github.yulichang.annotation.FieldMapping;
+import com.oimc.aimin.base.enums.DrugStatus;
+import com.oimc.aimin.ds.annotation.DictTranslate;
+import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
-
-import com.github.yulichang.annotation.FieldMapping;
-import com.oimc.aimin.base.enums.DrugStatus;
-import com.oimc.aimin.ds.annotation.DictTranslate;
-import lombok.Data;
+import java.util.List;
 
 /**
  * <p>
@@ -170,4 +170,8 @@ public class Drug implements Serializable {
 
     @TableField(exist = false)
     private DrugCategory categories;
+
+    @TableField(exist = false)
+    @EntityMapping(thisField = "drugId", joinField = "drugId")
+    private List<DrugImg> drugImgList;
 }

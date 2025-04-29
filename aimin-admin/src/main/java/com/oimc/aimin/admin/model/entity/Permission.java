@@ -63,8 +63,8 @@ public class Permission implements Serializable {
     /**
      * 路由名称
      */
-    @TableField("router_name")
-    private String routerName;
+    @TableField("name")
+    private String name;
 
     /**
      * 父权限ID

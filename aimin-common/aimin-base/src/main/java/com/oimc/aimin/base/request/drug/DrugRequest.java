@@ -9,6 +9,7 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 public class DrugRequest implements Serializable {
@@ -16,7 +17,7 @@ public class DrugRequest implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    private Integer drugId;
 
     // 药品名称，不能为空或空白
     @NotBlank(message = "药品名称不能为空")
@@ -74,4 +75,13 @@ public class DrugRequest implements Serializable {
 
     // 药品状态（如可用、停用等，可选）
     private DrugStatus status;
+
+    private List<Img> imgList;
+
+    @Data
+    public static class Img {
+        private String path;
+        private Boolean isMain;
+        private byte sort;
+    }
 }

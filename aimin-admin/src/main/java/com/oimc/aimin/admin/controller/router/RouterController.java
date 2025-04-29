@@ -2,8 +2,7 @@ package com.oimc.aimin.admin.controller.router;
 
 import com.oimc.aimin.admin.facade.PermissionFacadeService;
 import com.oimc.aimin.admin.model.vo.RouterVO;
-import com.oimc.aimin.admin.service.PermissionService;
-import com.oimc.aimin.base.resp.Result;
+import com.oimc.aimin.base.response.Result;
 import com.oimc.aimin.satoken.admin.StpAdminUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;

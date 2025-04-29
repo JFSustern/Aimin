@@ -1,0 +1,15 @@
+server:
+  port: 8086
+  servlet:
+    context-path: /aimin-canal
+
+spring:
+  application:
+    name: aimin-canal
+  profiles:
+    active: dev
+
+  config:
+    import:
+      - nacos:${spring.application.name}-${spring.profiles.active}.yml
+      - classpath:base.yml

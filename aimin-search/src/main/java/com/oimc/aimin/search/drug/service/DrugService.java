@@ -3,10 +3,9 @@ package com.oimc.aimin.search.drug.service;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.fasterxml.jackson.core.ObjectCodec;
-import com.oimc.aimin.base.resp.PageResp;
+import com.oimc.aimin.base.model.drug.index.DrugIndex;
+import com.oimc.aimin.base.response.PageResp;
 import com.oimc.aimin.search.drug.constants.DrugHighlightFields;
-import com.oimc.aimin.search.drug.model.index.DrugIndex;
 import com.oimc.aimin.search.drug.model.request.DrugPageRequest;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
@@ -34,7 +33,6 @@ import java.util.*;
 public class DrugService {
 
     private final ElasticsearchTemplate elasticsearchTemplate;
-    private final ObjectCodec objectCodec;
 
 
     @PostConstruct

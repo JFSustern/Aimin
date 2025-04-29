@@ -1,9 +1,8 @@
 package com.oimc.aimin.search.drug.controller;
 
-import com.oimc.aimin.base.resp.PageResp;
-import com.oimc.aimin.base.resp.Result;
-import com.oimc.aimin.search.drug.model.convertor.DrugConvertor;
-import com.oimc.aimin.search.drug.model.index.DrugIndex;
+import com.oimc.aimin.base.model.drug.index.DrugIndex;
+import com.oimc.aimin.base.response.PageResp;
+import com.oimc.aimin.base.response.Result;
 import com.oimc.aimin.search.drug.model.request.DrugPageRequest;
 import com.oimc.aimin.search.drug.service.DrugService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.*;
 public class DrugController {
 
     private final DrugService drugService;
-    private final DrugConvertor drugConvertor;
 
     @Operation(summary = "药品分页查询", description = "分页获取药品列表，支持关键字查询")
     @PostMapping

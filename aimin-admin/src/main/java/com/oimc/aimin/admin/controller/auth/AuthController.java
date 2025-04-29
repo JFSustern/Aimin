@@ -5,7 +5,7 @@ import com.oimc.aimin.admin.model.request.LoginRequest;
 import com.oimc.aimin.admin.model.vo.LoginVO;
 import com.oimc.aimin.admin.service.AdminService;
 import com.oimc.aimin.admin.service.impl.CaptchaService;
-import com.oimc.aimin.base.resp.Result;
+import com.oimc.aimin.base.response.Result;
 import com.oimc.aimin.satoken.admin.StpAdminUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;

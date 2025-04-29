@@ -18,3 +18,13 @@ spring:
       - classpath:mq.yml
       - classpath:base.yml
       - classpath:cache.yml
+      - classpath:file.yml
+
+canal:
+  server:
+    ip: ${CANAL.IP}
+    port: ${CANAL.PORT}
+  destination: example
+  initialDelay: 5000
+  fixedDelay: 5000
+  subscribe: .*\..*
