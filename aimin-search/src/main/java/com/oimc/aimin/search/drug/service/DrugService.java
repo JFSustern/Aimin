@@ -34,7 +34,6 @@ public class DrugService {
 
     private final ElasticsearchTemplate elasticsearchTemplate;
 
-
     @PostConstruct
     public void init(){
         IndexOperations indexOperations = elasticsearchTemplate.indexOps(DrugIndex.class);

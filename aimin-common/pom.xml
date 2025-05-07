@@ -23,5 +23,7 @@
         <module>aimin-mq</module>
         <module>aimin-satoken</module>
         <module>aimin-file</module>
+        <module>aimin-mongo</module>
+
     </modules>
 </project>
