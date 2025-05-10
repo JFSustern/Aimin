@@ -9,12 +9,29 @@ spring:
   profiles:
     active: dev
   ai:
-    openai:
-      base-url: http://localhost:11434
-      api-key: test
+    ollama:
+      base-url: http://127.0.0.1:11434
       chat:
         options:
           model: myaniu/qwen2.5-1m:latest
+      embedding:
+        options:
+          model: hf.co/sinequa/gme-Qwen2-VL-2B-Instruct-GGUF:Q8_0
+
+
+    vectorstore:
+      milvus:
+        client:
+          host: ${MILVUS_HOST}
+          port: 19530
+          username: ${MILVUS_USERNAME}
+          password: ${MILVUS_PASSWORD}
+        database-name: "default"
+        collection-name: "vector_store"
+        embedding-dimension: 1536
+        indexType: IVF_FLAT
+        metricType: COSINE
+        initialize-schema: true
 
 
 
@@ -23,3 +40,4 @@ spring:
       - nacos:${spring.application.name}-${spring.profiles.active}.yml
       - classpath:base.yml
       - classpath:mongo.yml
+      - classpath:file.yml
