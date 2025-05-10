@@ -11,9 +11,8 @@
 项目名称：爱民医生（aimin）。项目是一个基于SpringCloud微服务架构的SpingAi医疗问诊实战项目，通过集成多种大模型，实现了一个完整的AI应用。项目采用前后端分离的开发模式，前端使用Vue3+Element Plus，后端使用SpringCloud+SpringBoot。
 
 ## 项目地址
-后端：5月10日更新,最后一次代码封装调整
-前端：5月10日更新,最后一次代码封装调整
-小程序端：5月10日更新,最后一次代码封装调整
+[管理端：](https://gitee.com/dd_mark/aimin-admin-front)
+[小程序端：](https://gitee.com/dd_mark/aimin-xcx-user)
 
 ## 技术栈
 
