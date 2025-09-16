@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.ai.chat.messages.Message;
 
@@ -19,6 +20,8 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 public class Msg {
+    @Id
+    private String id;
     private String conversationId;
     private String text;
     private Date date;
